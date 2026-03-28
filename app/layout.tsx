@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Google_Sans_Flex } from "next/font/google";
+import { Geist, Geist_Mono, Geist_Pixel } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
-  variable: "--font-google-sans-flex",
+  variable: "--font-geist-sans",
   subsets: ["latin"],
 });
 
@@ -12,8 +12,8 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const googleSansFlex = Google_Sans_Flex({
-  variable: "--font-google-sans-flex",
+const geistPixel = Geist_Pixel({
+  variable: "--font-geist-pixel",
   subsets: ["latin"],
 });
 
