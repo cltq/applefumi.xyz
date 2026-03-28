@@ -54,16 +54,16 @@ export default function DynamicIslandNav() {
             "0 8px 32px rgba(255, 255, 255, 0.01), inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
-        <div className="...">
+        <div className="pl-2 ...">
             <Image src="/vercel.svg" alt="logo" width={18} height={18} />
         </div>
         
         {/* Divider */}
         <div
-        className="flex-shrink-0 ml-3 mr-2"
+        className="flex-shrink-0 ml-3 mr-3"
         style={{
             width: "1px",
-            height: 16,
+            height: 18,
             background: "rgba(129, 129, 129, 0.85)",
         }}
         />

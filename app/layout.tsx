@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Geist_Pixel } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const geistPixel = Geist_Pixel({
-  variable: "--font-geist-pixel",
-  subsets: ["latin"],
-});
+// ❌ Remove these — no instantiation needed
+// const geistSans = GeistSans({ ... })
+// const geistMono = GeistMono({ ... })
 
 export const metadata: Metadata = {
   title: "Fumi",
@@ -24,15 +14,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
+      className={`${GeistSans.variable} ${GeistMono.variable}`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-screen bg-black text-white font-sans antialiased">
+        {children}
+      </body>
     </html>
   );
 }
