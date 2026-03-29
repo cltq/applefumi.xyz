@@ -128,6 +128,6 @@ This project does not currently have a test suite. If adding tests:
 
 ## Agent History
 - Use **Asia/Bangkok** or **GMT+7** timezone for timestamps
-- Log every agent action in `HISTORY.md` with timestamp and description
+- Log every agent action in `AGENTS_HISTORY.md` with timestamp and description
 - HISTORY.md should log everything that is requested through agent
 - Log every git action in `GIT_HISTORY.md` with timestamp and description
