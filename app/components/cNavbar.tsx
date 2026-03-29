@@ -10,7 +10,7 @@ const navLinks = [
   { label: "Test", path: "/test" },
 ];
 
-export default function DynamicIslandNav() {
+export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0 });
