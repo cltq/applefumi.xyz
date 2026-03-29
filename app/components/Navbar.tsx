@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
+import { glassmorphism, glassmorphismBorder } from "@/app/lib/styles";
 
 const navLinks = [
   { label: "Home", path: "/" },
@@ -63,26 +64,28 @@ export default function Navbar() {
         ref={navRef}
         className="relative flex items-center gap-0.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-[65px] pointer-events-auto"
         style={{
-          background: "rgba(0, 0, 0, 0.72)",
-          backdropFilter: "blur(28px)",
-          WebkitBackdropFilter: "blur(28px)",
-          border: "1px solid rgba(255, 255, 255, 0.4)",
-          boxShadow:
-            "0 8px 32px rgba(255, 255, 255, 0.01), inset 0 1px 0 rgba(255,255,255,0.15)",
+          ...glassmorphism,
+          ...glassmorphismBorder,
+          boxShadow: "0 8px 32px rgba(255, 255, 255, 0.01), inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
         <div className="pl-1.5 sm:pl-2">
-            <Image src="/vercel.svg" alt="logo" width={16} height={16} className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
+          <Image
+            src="/vercel.svg"
+            alt="logo"
+            width={16}
+            height={16}
+            className="w-4 h-4 sm:w-[18px] sm:h-[18px]"
+          />
         </div>
-        
-        {/* Divider */}
+
         <div
-        className="flex-shrink-0 mx-2 sm:mx-3"
-        style={{
+          className="flex-shrink-0 mx-2 sm:mx-3"
+          style={{
             width: "1px",
             height: 16,
             background: "rgba(129, 129, 129, 0.85)",
-        }}
+          }}
         />
 
         <div
