@@ -26,7 +26,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="w-full mt-auto py-3 sm:py-4 px-3 sm:px-6"
+      className="w-full mt-auto py-[10px] sm:py-[14px] px-[10px] sm:px-[22px]"
       style={{ ...glassmorphism, ...glassmorphismBorderTop }}
     >
       <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
