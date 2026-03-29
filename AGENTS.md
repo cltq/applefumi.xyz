@@ -122,12 +122,16 @@ This project does not currently have a test suite. If adding tests:
 - Run `npm run deploy` to build and deploy
 
 ## Git
-- Only commit when "commit" in the message
-- only commit and push when "commit and push" in the message
-- Make a commit with message every time there's a code change, but don't push
+- Commit with message every time the code or files changed
+- Commit message format: "User requested: [user message] - Files changed: [list of files]"
+- Exception: AGENTS.md, CLAUDE.md, GEMINI.md should commit with message and push automatically if changed
+- If "git status" shows local commits NOT present with remote, push GIT_HISTORY.md and AGENTS_HISTORY.md
 
 ## Agent History
 - Use **Asia/Bangkok** or **GMT+7** timezone for timestamps
-- Log every agent action in `AGENTS_HISTORY.md` with timestamp and description
-- HISTORY.md should log everything that is requested through agent
+- Log every agent action in `AGENTS_HISTORY.md` with:
+  1. Agent used
+  2. User requested message
+  3. Agent response
+  4. Everything the agent does
 - Log every git action in `GIT_HISTORY.md` with timestamp and description
