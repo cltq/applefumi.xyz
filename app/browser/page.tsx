@@ -6,7 +6,7 @@ export default function Browser() {
     <div className="flex flex-col min-h-screen items-stretch font-sans relative">
       <div className="absolute inset-0 z-0">
         <Image
-          src="/background.png"
+          src="https://raw.githubusercontent.com/cltq/cltq/refs/heads/main/assets/Kanade.png"
           alt="background"
           fill
           className="object-cover"
