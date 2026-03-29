@@ -5,6 +5,11 @@ Fumi is a personal website built with Next.js 16 (App Router), React 19, TypeScr
 
 ---
 
+## General
+- Use **Asia/Bangkok** or **GMT+7** timezone as the main timezone for every session
+
+---
+
 ## Build & Development Commands
 
 ```bash
@@ -128,7 +133,6 @@ This project does not currently have a test suite. If adding tests:
 - If "git status" shows local commits NOT present with remote, push GIT_HISTORY.md and AGENTS_HISTORY.md
 
 ## Agent History
-- Use **Asia/Bangkok** or **GMT+7** timezone for timestamps
 - Log every agent action in `AGENTS_HISTORY.md` with:
   1. Agent used
   2. User requested message
