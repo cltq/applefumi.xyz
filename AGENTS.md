@@ -128,4 +128,5 @@ This project does not currently have a test suite. If adding tests:
 
 ## Agent History
 - Log every agent action in `HISTORY.md` with timestamp and description
-- HISTORY.md should log everything that is requested through agent and log the git commits
+- HISTORY.md should log everything that is requested through agent
+- Log every git action in `GIT_HISTORY.md` with timestamp and description
