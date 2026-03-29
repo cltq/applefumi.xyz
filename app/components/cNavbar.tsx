@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -17,18 +17,17 @@ export default function Navbar() {
   const [isReady, setIsReady] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const isFirstRender = useRef(true);
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
   const activeLink =
     navLinks.find((item) => item.path === normalizedPath) || navLinks[0];
 
-  useEffect(() => {
+  const updateIndicator = useCallback(() => {
     const idx = navLinks.findIndex((item) => item.path === activeLink.path);
     const btn = buttonRefs.current[idx];
     const nav = navRef.current;
-    if (!btn || !nav) {
-      return;
-    }
+    if (!btn || !nav) return;
 
     const navRect = nav.getBoundingClientRect();
     const btnRect = btn.getBoundingClientRect();
@@ -37,14 +36,32 @@ export default function Navbar() {
       left: btnRect.left - navRect.left,
       width: btnRect.width,
     });
-    setIsReady(true);
   }, [activeLink.path]);
 
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(updateIndicator);
+      });
+    }
+
+    setIsReady(false);
+    const timer = setTimeout(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(updateIndicator);
+        setIsReady(true);
+      });
+    }, 50);
+
+    return () => clearTimeout(timer);
+  }, [pathname, updateIndicator]);
+
   return (
-    <div className="fixed top-4 left-0 right-0 flex justify-center z-50 pointer-events-none">
+    <div className="fixed top-3 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex justify-center z-50 pointer-events-none">
       <nav
         ref={navRef}
-        className="relative flex items-center gap-0.5 px-2.5 py-2 rounded-full pointer-events-auto transition-all duration-300 ease-out"
+        className="relative flex items-center gap-0.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-[65px] pointer-events-auto"
         style={{
           background: "rgba(0, 0, 0, 0.72)",
           backdropFilter: "blur(28px)",
@@ -54,22 +71,22 @@ export default function Navbar() {
             "0 8px 32px rgba(255, 255, 255, 0.01), inset 0 1px 0 rgba(255,255,255,0.15)",
         }}
       >
-        <div className="pl-2 ...">
-            <Image src="/vercel.svg" alt="logo" width={18} height={18} />
+        <div className="pl-1.5 sm:pl-2">
+            <Image src="/vercel.svg" alt="logo" width={16} height={16} className="w-4 h-4 sm:w-[18px] sm:h-[18px]" />
         </div>
         
         {/* Divider */}
         <div
-        className="flex-shrink-0 ml-3 mr-3"
+        className="flex-shrink-0 mx-2 sm:mx-3"
         style={{
             width: "1px",
-            height: 18,
+            height: 16,
             background: "rgba(129, 129, 129, 0.85)",
         }}
         />
 
         <div
-          className="absolute rounded-full"
+          className="absolute rounded-[65px]"
           style={{
             left: indicatorStyle.left,
             width: indicatorStyle.width,
@@ -79,7 +96,7 @@ export default function Navbar() {
             background: "linear-gradient(135deg, #ffffff, #ffffff)",
             boxShadow: "0 0 18px rgba(255, 255, 255, 0.55)",
             transition: isReady
-              ? "left 0.34s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.34s cubic-bezier(0.25, 0.8, 0.25, 1), background 0.25s ease"
+              ? "left 0.34s cubic-bezier(0.25, 0.8, 0.25, 1), width 0.34s cubic-bezier(0.25, 0.8, 0.25, 1), opacity 0.15s ease"
               : "none",
             opacity: isReady ? 1 : 0,
             zIndex: 0,
@@ -95,7 +112,7 @@ export default function Navbar() {
                 buttonRefs.current[i] = el;
               }}
               onClick={() => router.push(nav.path)}
-              className="relative z-10 px-4 py-1.5 rounded-full text-sm border-none outline-none cursor-pointer select-none transition-all duration-250 ease-in-out hover:scale-105 hover:text-white"
+              className="relative z-10 px-3 sm:px-4 py-1.5 rounded-[65px] text-xs sm:text-sm border-none outline-none cursor-pointer select-none transition-all duration-250 ease-in-out hover:scale-105 hover:text-white font-[family-name:var(--font-geist-mono)]"
               style={{
                 background: "transparent",
                 color: isActive ? "#000" : "rgba(255,255,255,0.78)",
