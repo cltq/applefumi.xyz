@@ -127,4 +127,4 @@ This project does not currently have a test suite. If adding tests:
 - Make a commit with message every time there's a code change, but don't push
 
 ## Agent History
-- Log every agent action in `AGENTS_HISTORY.md` with timestamp and description
+- Log every agent action in `HISTORY.md` with timestamp and description
