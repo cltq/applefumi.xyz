@@ -5,3 +5,7 @@
 - **14:30**: Added commit guideline to AGENTS.md - make a commit with message every time there's a code change, but don't push
 - **14:30**: Created AGENTS_HISTORY.md to log agent actions and added guideline to AGENTS.md
 - **14:30**: Renamed HISTORY.md to AGENTS_HISTORY.md and updated reference in AGENTS.md
+- **14:30**: Updated Git and Agent History guidelines - commit with message for every code change, log all files, auto-push for AGENTS.md/CLAUDE.md/GEMINI.md, push GIT/AGENTS_HISTORY if local commits not in remote
+- **14:30**: Updated AGENTS_HISTORY.md to log agent used, user requested message, agent response, and everything agent does
+- **14:30**: Updated GIT_HISTORY.md with all git commits
+- **14:30**: Created CURSOR.md and OPENCODE.md agent files referencing AGENTS.md
