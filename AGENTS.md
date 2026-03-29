@@ -11,6 +11,7 @@ Fumi is a personal website built with Next.js 16 (App Router), React 19, TypeScr
 - Use **Asia/Bangkok** or **GMT+7** timezone as the main timezone for every session
 - Always run `git status` to check the current state before summarizing
 - When task is done, summarize: 1) Changes made 2) How many commits 3) How many ongoing all commits (local commits not pushed from git status)
+- Create necessary tracking files if they don't exist: `GIT_HISTORY.md` for git commits, `AGENTS_HISTORY.md` for agent actions
 
 ---
 
@@ -143,4 +144,4 @@ This project does not currently have a test suite. If adding tests:
   2. User requested message
   3. Agent response
   4. Everything the agent does
-- Log every git action in `GIT_HISTORY.md` with timestamp and description
+- Log every git commit in `GIT_HISTORY.md` with timestamp, description, and files changed
