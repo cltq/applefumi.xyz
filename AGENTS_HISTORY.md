@@ -3,6 +3,7 @@
 ## 2026-04-02
 
 - Agent: opencode | User requested: "at the footer, right below the copyright text. Make a button to view another page that is view all the technologies that is used in this current project" | Agent response: Added link to footer below copyright, created /technologies page with all project technologies grouped by category | Action: Updated app/components/Footer.tsx, Created app/lib/technologies.ts, Created app/technologies/page.tsx
+- Agent: opencode | User requested: "when clicked make it an popup instead of going to another page. With smooth animation and background blur" | Agent response: Changed from page navigation to modal popup with smooth scale/fade animation, backdrop blur, escape key and click-outside to close | Action: Created app/components/TechnologiesModal.tsx, Updated app/components/Footer.tsx
 - Agent: opencode | User requested: "change the name to FlashingTitle.tsx" | Agent response: Renamed TypewriterTitle.tsx to FlashingTitle.tsx and updated import in layout.tsx | Action: Renamed components/TypewriterTitle.tsx to components/FlashingTitle.tsx, Updated app/layout.tsx
 
 - Agent: opencode | User requested: "can you make the web page title have a little animations like typewriter" | Agent response: Created TypewriterTitle client component that types "Fumi | Portfolio" character by character in the browser tab title | Action: Created components/TypewriterTitle.tsx, Updated app/layout.tsx
