@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import { technologies, type Technology } from "@/app/lib/technologies";
 import { glassmorphism } from "@/app/lib/styles";
 
@@ -69,7 +70,7 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 transition-all duration-300"
       style={{
         background: isVisible ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0)",
         backdropFilter: isVisible ? "blur(12px)" : "blur(0px)",
@@ -80,16 +81,17 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
     >
       <div
         ref={modalRef}
-        className="w-full max-w-2xl max-h-[80vh] overflow-y-auto rounded-xl p-6 transition-all duration-300"
+        className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8 transition-all duration-300"
         style={{
           ...glassmorphism,
-          background: "rgba(10, 10, 10, 0.85)",
+          background: "rgba(10, 10, 10, 0.9)",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
           transform: isVisible ? "scale(1) translateY(0)" : "scale(0.95) translateY(10px)",
           opacity: isVisible ? 1 : 0,
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl font-semibold">Technologies</h2>
           <button
             onClick={onClose}
@@ -118,25 +120,28 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
             </svg>
           </button>
         </div>
-        <div className="space-y-6">
+        <div className="space-y-6 sm:space-y-8">
           {Object.entries(grouped).map(([category, techs]) => (
             <section key={category}>
-              <h3 className="text-sm font-medium mb-3 opacity-50 uppercase tracking-wide">
+              <h3 className="text-sm font-medium mb-3 sm:mb-4 opacity-50 uppercase tracking-wide">
                 {categoryLabels[category as Technology["category"]]}
               </h3>
               <div className="grid gap-2 sm:grid-cols-2">
                 {techs.map((tech) => (
-                  <div
+                  <Link
                     key={tech.name}
-                    className="p-3 rounded-lg border transition-all duration-200"
+                    href={tech.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-3 sm:p-4 rounded-lg border transition-all duration-200 hover:border-white/30"
                     style={{
                       background: "rgba(255, 255, 255, 0.03)",
                       borderColor: "rgba(255, 255, 255, 0.08)",
                     }}
                   >
-                    <h4 className="font-medium text-sm mb-1">{tech.name}</h4>
-                    <p className="text-xs opacity-50">{tech.description}</p>
-                  </div>
+                    <h4 className="font-medium text-sm sm:text-base mb-1">{tech.name}</h4>
+                    <p className="text-xs sm:text-sm opacity-50">{tech.description}</p>
+                  </Link>
                 ))}
               </div>
             </section>
