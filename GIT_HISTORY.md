@@ -5,6 +5,7 @@
 - Commit - "Update: Add technologies page with link in footer - Files changed: app/components/Footer.tsx, Created app/lib/technologies.ts, Created app/technologies/page.tsx"
 - Commit - "Update: Change technologies to popup modal with animation and blur - Files changed: Created app/components/TechnologiesModal.tsx, Updated app/components/Footer.tsx"
 - Commit - "Update: Add links to technologies, white border, increase modal size - Files changed: Updated app/lib/technologies.ts, Updated app/components/TechnologiesModal.tsx, Removed app/technologies/page.tsx"
+- Commit - "Update: Add closing animation, decrease blur to 6px - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Update: Rename TypewriterTitle.tsx to FlashingTitle.tsx - Files changed: components/TypewriterTitle.tsx -> components/FlashingTitle.tsx, app/layout.tsx"
 
 - Commit - "Update: Add typewriter animation to web page title - Files changed: components/TypewriterTitle.tsx, app/layout.tsx"

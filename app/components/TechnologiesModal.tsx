@@ -20,18 +20,30 @@ interface TechnologiesModalProps {
 }
 
 export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModalProps) {
+  const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
   useEffect(() => {
     if (isOpen) {
+      setMounted(true);
       requestAnimationFrame(() => {
         setIsVisible(true);
       });
     } else {
       setIsVisible(false);
+      timeoutRef.current = setTimeout(() => {
+        setMounted(false);
+      }, 300);
     }
   }, [isOpen]);
+
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -55,7 +67,7 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
     };
   }, [isOpen]);
 
-  if (!isOpen && !isVisible) return null;
+  if (!mounted) return null;
 
   const grouped = technologies.reduce(
     (acc, tech) => {
@@ -73,8 +85,8 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
       className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 transition-all duration-300"
       style={{
         background: isVisible ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0)",
-        backdropFilter: isVisible ? "blur(12px)" : "blur(0px)",
-        WebkitBackdropFilter: isVisible ? "blur(12px)" : "blur(0px)",
+        backdropFilter: isVisible ? "blur(6px)" : "blur(0px)",
+        WebkitBackdropFilter: isVisible ? "blur(6px)" : "blur(0px)",
         opacity: isVisible ? 1 : 0,
       }}
       onClick={onClose}
