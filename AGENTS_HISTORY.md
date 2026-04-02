@@ -13,6 +13,7 @@
 - Agent: opencode | Fix: "it still dead static" | Agent response: Completely rewrote with separate cursor interval, proper state for displayText, empty deps array to prevent infinite loops | Action: Updated components/TypewriterTitle.tsx
 - Agent: opencode | Fix: "animation is showing on the page too" | Agent response: Removed visible text and cursor, component now returns null and only updates document.title | Action: Updated components/TypewriterTitle.tsx
 - Agent: opencode | Fix: "make it smoother, letters disappearing single then next" | Agent response: Reduced typing speed from 100 to 80ms, deleting speed from 60 to 40ms, reduced random variance for smoother consistent timing | Action: Updated components/TypewriterTitle.tsx
+- Agent: opencode | Fix: "Word disappearing d then r, typing start with first letter then continue" | Agent response: Removed random timing variance for consistent smooth animation - types first letter then builds, deletes last letter then continues | Action: Updated components/TypewriterTitle.tsx
 
 ## 2026-03-30
 
