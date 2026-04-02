@@ -41,6 +41,8 @@ export default function Typewriter({
   }, [cursorBlinkSpeed]);
 
   useEffect(() => {
+    if (!phrases || phrases.length === 0) return;
+
     const tick = () => {
       const currentPhrase = phrases[phraseIndexRef.current];
       const currentLength = charIndexRef.current;
