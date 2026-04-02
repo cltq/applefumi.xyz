@@ -9,6 +9,7 @@
 - Commit - "Update: Increase border radius to 24px for more rounded corners - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Fix: Add delay for opening animation to play - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Update: Add global custom scrollbar styles - Files changed: app/globals.css"
+- Commit - "Update: Make modal responsive (bottom sheet on mobile) - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Update: Rename TypewriterTitle.tsx to FlashingTitle.tsx - Files changed: components/TypewriterTitle.tsx -> components/FlashingTitle.tsx, app/layout.tsx"
 
 - Commit - "Update: Add typewriter animation to web page title - Files changed: components/TypewriterTitle.tsx, app/layout.tsx"

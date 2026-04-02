@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { technologies, type Technology } from "@/app/lib/technologies";
-import { glassmorphism } from "@/app/lib/styles";
 
 const categoryLabels: Record<Technology["category"], string> = {
   framework: "Framework",
@@ -82,7 +81,7 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8 transition-all duration-300"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-8 transition-all duration-300"
       style={{
         background: isVisible ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0)",
         backdropFilter: isVisible ? "blur(6px)" : "blur(0px)",
@@ -93,18 +92,18 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
     >
       <div
         ref={modalRef}
-        className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[24px] p-6 sm:p-8 transition-all duration-300"
+        className="w-full sm:max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto rounded-b-none sm:rounded-[24px] p-4 sm:p-6 md:p-8 transition-all duration-300"
         style={{
-          ...glassmorphism,
-          background: "rgba(10, 10, 10, 0.9)",
+          background: "rgba(10, 10, 10, 0.95)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
-          transform: isVisible ? "scale(1) translateY(0)" : "scale(0.95) translateY(10px)",
+          borderBottom: "none",
+          transform: isVisible ? "translateY(0)" : "translateY(100%)",
           opacity: isVisible ? 1 : 0,
         }}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between mb-6 sm:mb-8">
-          <h2 className="text-xl sm:text-2xl font-semibold">Technologies</h2>
+        <div className="flex items-center justify-between mb-4 sm:mb-6 md:mb-8">
+          <h2 className="text-lg sm:text-xl md:text-2xl font-semibold">Technologies</h2>
           <button
             onClick={onClose}
             className="p-2 rounded-full transition-all duration-200 hover:scale-110"
@@ -132,13 +131,13 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
             </svg>
           </button>
         </div>
-        <div className="space-y-6 sm:space-y-8">
+        <div className="space-y-4 sm:space-y-6 md:space-y-8">
           {Object.entries(grouped).map(([category, techs]) => (
             <section key={category}>
-              <h3 className="text-sm font-medium mb-3 sm:mb-4 opacity-50 uppercase tracking-wide">
+              <h3 className="text-xs sm:text-sm font-medium mb-2 sm:mb-3 md:mb-4 opacity-50 uppercase tracking-wide">
                 {categoryLabels[category as Technology["category"]]}
               </h3>
-              <div className="grid gap-2 sm:grid-cols-2">
+              <div className="grid grid-cols-1 gap-2">
                 {techs.map((tech) => (
                   <Link
                     key={tech.name}
