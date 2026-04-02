@@ -1,5 +1,9 @@
 # Agent History
 
+## 2026-04-02
+
+- Agent: opencode | User requested: "can you make the web page title have a little animations like typewriter" | Agent response: Created TypewriterTitle client component that types "Fumi | Portfolio" character by character in the browser tab title | Action: Created components/TypewriterTitle.tsx, Updated app/layout.tsx
+
 ## 2026-03-30
 
 - Added commit guideline to AGENTS.md - make a commit with message every time there's a code change, but don't push

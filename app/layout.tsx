@@ -3,6 +3,7 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { GeistPixelSquare } from "geist/font/pixel";
 import { Kanit } from "next/font/google";
+import TypewriterTitle from "@/components/TypewriterTitle";
 import "./globals.css";
 
 const kanit = Kanit({
@@ -36,6 +37,7 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${kanit.variable}`}
     >
       <body className="min-h-screen bg-black text-white font-sans antialiased">
+        <TypewriterTitle />
         {children}
       </body>
     </html>
