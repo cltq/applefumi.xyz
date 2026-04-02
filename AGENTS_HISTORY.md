@@ -3,6 +3,7 @@
 ## 2026-04-02
 
 - Agent: opencode | User requested: "can you make the web page title have a little animations like typewriter" | Agent response: Created TypewriterTitle client component that types "Fumi | Portfolio" character by character in the browser tab title | Action: Created components/TypewriterTitle.tsx, Updated app/layout.tsx
+- Agent: opencode | User requested: "Remove '| Portfolio' and make the animation loops" | Agent response: Removed suffix, made animation loop continuously - types out then erases and repeats | Action: Updated components/TypewriterTitle.tsx
 
 ## 2026-03-30
 

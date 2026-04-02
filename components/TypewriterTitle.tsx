@@ -1,34 +1,39 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 const fullTitle = "Fumi";
-const suffix = " | Portfolio";
 
 export default function TypewriterTitle() {
-  const [displayed, setDisplayed] = useState("");
+  const iRef = useRef(0);
+  const directionRef = useRef<"forward" | "backward">("forward");
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setDisplayed(fullTitle.slice(0, i + 1));
-      i++;
-      if (i >= fullTitle.length) {
-        clearInterval(interval);
-        setTimeout(() => {
-          document.title = fullTitle + suffix;
-        }, 1500);
+    let timeout: ReturnType<typeof setTimeout>;
+
+    const tick = () => {
+      if (directionRef.current === "forward") {
+        iRef.current++;
+        document.title = fullTitle.slice(0, iRef.current);
+        if (iRef.current >= fullTitle.length) {
+          directionRef.current = "backward";
+          timeout = setTimeout(tick, 1500);
+          return;
+        }
+      } else {
+        iRef.current--;
+        document.title = fullTitle.slice(0, iRef.current);
+        if (iRef.current <= 0) {
+          directionRef.current = "forward";
+        }
       }
-    }, 120);
+      timeout = setTimeout(tick, 120);
+    };
 
-    return () => clearInterval(interval);
+    timeout = setTimeout(tick, 500);
+
+    return () => clearTimeout(timeout);
   }, []);
-
-  useEffect(() => {
-    if (displayed) {
-      document.title = displayed + suffix;
-    }
-  }, [displayed]);
 
   return null;
 }
