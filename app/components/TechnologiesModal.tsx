@@ -81,7 +81,7 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-8 transition-all duration-300"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 md:p-8 transition-all duration-300"
       style={{
         background: isVisible ? "rgba(0, 0, 0, 0.6)" : "rgba(0, 0, 0, 0)",
         backdropFilter: isVisible ? "blur(6px)" : "blur(0px)",
@@ -92,12 +92,11 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
     >
       <div
         ref={modalRef}
-        className="w-full sm:max-w-4xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto rounded-b-none sm:rounded-[24px] p-4 sm:p-6 md:p-8 transition-all duration-300"
+        className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[24px] p-4 sm:p-6 md:p-8 transition-all duration-300"
         style={{
           background: "rgba(10, 10, 10, 0.95)",
           border: "1px solid rgba(255, 255, 255, 0.15)",
-          borderBottom: "none",
-          transform: isVisible ? "translateY(0)" : "translateY(100%)",
+          transform: isVisible ? "scale(1)" : "scale(0.9)",
           opacity: isVisible ? 1 : 0,
         }}
         onClick={(e) => e.stopPropagation()}

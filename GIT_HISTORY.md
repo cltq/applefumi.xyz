@@ -11,6 +11,7 @@
 - Commit - "Update: Add global custom scrollbar styles - Files changed: app/globals.css"
 - Commit - "Update: Make modal responsive (bottom sheet on mobile) - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Update: Make scrollbar responsive for mobile - Files changed: app/globals.css"
+- Commit - "Update: Change to pop-in/pop-out animation for modal - Files changed: app/components/TechnologiesModal.tsx"
 - Commit - "Update: Rename TypewriterTitle.tsx to FlashingTitle.tsx - Files changed: components/TypewriterTitle.tsx -> components/FlashingTitle.tsx, app/layout.tsx"
 
 - Commit - "Update: Add typewriter animation to web page title - Files changed: components/TypewriterTitle.tsx, app/layout.tsx"
