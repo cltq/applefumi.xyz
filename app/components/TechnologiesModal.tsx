@@ -93,7 +93,7 @@ export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModal
     >
       <div
         ref={modalRef}
-        className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-2xl p-6 sm:p-8 transition-all duration-300"
+        className="w-full max-w-4xl max-h-[85vh] overflow-y-auto rounded-[24px] p-6 sm:p-8 transition-all duration-300"
         style={{
           ...glassmorphism,
           background: "rgba(10, 10, 10, 0.9)",
