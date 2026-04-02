@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 
 const PHRASES = ["Fumi"];
 const FLASH_INTERVAL = 500;
-const PAUSE_TIME = 1500;
+const PAUSE_TIME = 1000;
 
 export default function TypewriterTitle() {
   const phraseIndexRef = useRef(0);

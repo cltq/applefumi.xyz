@@ -3,6 +3,7 @@
 ## 2026-04-02
 
 - Commit - "Update: Change to flashing animation (disappear/appear) instead of typewriter - Files changed: components/TypewriterTitle.tsx"
+- Commit - "Update: Rename TypewriterTitle.tsx to FlashingTitle.tsx - Files changed: components/TypewriterTitle.tsx -> components/FlashingTitle.tsx, app/layout.tsx"
 
 - Commit - "Update: Add typewriter animation to web page title - Files changed: components/TypewriterTitle.tsx, app/layout.tsx"
 - Commit - "Update: Remove suffix and make typewriter animation loop - Files changed: components/TypewriterTitle.tsx"
