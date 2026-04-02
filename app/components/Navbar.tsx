@@ -7,8 +7,8 @@ import { glassmorphism, glassmorphismBorder } from "@/app/lib/styles";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
-  { label: "Test", path: "/test" },
+  // { label: "About", path: "/about" },
+  // { label: "Test", path: "/test" },
 ];
 
 export default function Navbar() {
