@@ -7,6 +7,7 @@
 - Agent: opencode | User requested: "when the title is empty or no letters. Make a invisible space to make the url doesnt show" | Agent response: Added zero-width space character when title is empty to prevent URL from showing | Action: Updated components/TypewriterTitle.tsx
 - Agent: opencode | User requested: "Build a smooth, modern typewriter animation component..." | Agent response: Rebuilt TypewriterTitle with randomized timing, blinking cursor, multiple phrases support, smooth typing/deleting loop, blank document.title when empty | Action: Updated components/TypewriterTitle.tsx
 - Agent: opencode | Fix: "Cannot read properties of undefined (reading '0')" error when phrases is empty | Agent response: Added guard clause to return early if phrases array is empty or undefined | Action: Updated components/TypewriterTitle.tsx
+- Agent: opencode | Fix: "Animation dead static, no animation at all" | Agent response: Added default value `["Fumi"]` for phrases prop so it works without being explicitly passed | Action: Updated components/TypewriterTitle.tsx
 
 ## 2026-03-30
 

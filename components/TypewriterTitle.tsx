@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 
 interface TypewriterProps {
-  phrases: string[];
+  phrases?: string[];
   typingSpeed?: number;
   deletingSpeed?: number;
   pauseDuration?: number;
@@ -12,7 +12,7 @@ interface TypewriterProps {
 }
 
 export default function Typewriter({
-  phrases,
+  phrases = ["Fumi"],
   typingSpeed = 80,
   deletingSpeed = 50,
   pauseDuration = 1500,

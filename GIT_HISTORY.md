@@ -7,6 +7,7 @@
 - Commit - "Update: Add zero-width space when title is empty - Files changed: components/TypewriterTitle.tsx"
 - Commit - "Update: Rebuild typewriter with smooth animation, blinking cursor, multiple phrases support - Files changed: components/TypewriterTitle.tsx"
 - Commit - "Fix: Add guard clause for empty phrases array - Files changed: components/TypewriterTitle.tsx"
+- Commit - "Fix: Add default phrases value so animation works without props - Files changed: components/TypewriterTitle.tsx"
 
 ## 2026-03-30
 
