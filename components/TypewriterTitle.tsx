@@ -22,7 +22,8 @@ export default function TypewriterTitle() {
         }
       } else {
         iRef.current--;
-        document.title = fullTitle.slice(0, iRef.current);
+        const title = fullTitle.slice(0, iRef.current) || "\u200B";
+        document.title = title;
         if (iRef.current <= 0) {
           directionRef.current = "forward";
         }

@@ -4,6 +4,7 @@
 
 - Commit - "Update: Add typewriter animation to web page title - Files changed: components/TypewriterTitle.tsx, app/layout.tsx"
 - Commit - "Update: Remove suffix and make typewriter animation loop - Files changed: components/TypewriterTitle.tsx"
+- Commit - "Update: Add zero-width space when title is empty - Files changed: components/TypewriterTitle.tsx"
 
 ## 2026-03-30
 
