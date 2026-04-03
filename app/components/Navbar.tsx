@@ -90,9 +90,9 @@ export default function Navbar() {
                 onClick={() => router.push(nav.path)}
                 className="relative z-10 px-3 sm:px-4 py-1.5 text-xs sm:text-sm border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 font-[family-name:var(--font-geist-mono)] rounded-md"
                 style={{
-                  background: isActive ? "rgba(255,255,255,0.1)" : "transparent",
+                  background: "transparent",
                   color: isActive
-                    ? "rgba(255,255,255,0.98)"
+                    ? "rgba(255,255,255,1)"
                     : "rgba(255,255,255,0.7)",
                   fontWeight: isActive ? 600 : 400,
                   letterSpacing: "0.02em",
