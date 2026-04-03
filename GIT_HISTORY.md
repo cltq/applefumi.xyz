@@ -2,6 +2,7 @@
 
 ## 2026-04-03
 
+- Commit - "Update: Remove background highlight from navbar active link and make active text fully opaque white - Files changed: app/components/Navbar.tsx"
 - Commit - "Update: Change main background color to lighter gray in dark mode and add text highlighting to navbar active link - Files changed: app/about/page.tsx, app/test/page.tsx, app/components/Navbar.tsx"
 - Commit - "Update: Fix footer positioning on /about and /test pages by adding flex layout - Files changed: app/about/page.tsx, app/test/page.tsx"
 - Commit - "Update: fix /about and /test pages to make them responsive and scrollable - Files changed: app/about/page.tsx, app/test/page.tsx"
