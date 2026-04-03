@@ -31,16 +31,10 @@ export const technologies: Technology[] = [
     category: "library",
   },
   {
-    name: "Cloudflare Workers",
+    name: "Vercel",
     description: "Edge computing platform for deploying serverless functions",
-    url: "https://workers.cloudflare.com",
+    url: "https://vercel.com",
     category: "deployment",
-  },
-  {
-    name: "@opennextjs/cloudflare",
-    description: "Adapter for deploying Next.js applications to Cloudflare Workers",
-    url: "https://github.com/opennextjs/cloudflare",
-    category: "tool",
   },
   {
     name: "Geist Sans",
