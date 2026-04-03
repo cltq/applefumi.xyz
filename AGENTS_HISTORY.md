@@ -2,6 +2,7 @@
 
 ## 2026-04-03
 
+- Agent: GitHub Copilot | User requested: "but somehow the footer isnt at the bottom anymore. Also dont push when i doesnt said" | Agent response: Fixed footer positioning by adding flex flex-col to the container div and flex-1 to main, ensuring footer stays at bottom. Noted not to push automatically. | Action: Updated app/about/page.tsx, Updated app/test/page.tsx
 - Agent: GitHub Copilot | User requested: "can you fix /about and /test because i dont know how it can scrolls. So make it responsive" | Agent response: Fixed the /about and /test pages by removing vertical centering from the main element to allow content to flow from top and enable proper scrolling, while maintaining responsive design with Tailwind classes. | Action: Updated app/about/page.tsx, Updated app/test/page.tsx
 
 ## 2026-04-02
