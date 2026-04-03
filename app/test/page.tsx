@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 
 export default function TestPage() {
   return (
-    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-black text-zinc-900 dark:text-zinc-100">
+    <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-gray-100 text-zinc-900 dark:text-zinc-900">
       <Navbar />
       <main className="flex-1 p-6 sm:p-8 pt-20 sm:pt-24">
         <h1 className="text-2xl sm:text-4xl font-semibold mb-4">Test Page</h1>
