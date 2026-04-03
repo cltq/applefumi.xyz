@@ -10,8 +10,6 @@ const navLinks = [
   { label: "Test", path: "/test" },
 ];
 
-const transition = "transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]";
-
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
@@ -34,22 +32,18 @@ export default function Navbar() {
   }, []);
 
   return (
-    <div
-      className={`fixed z-50 pointer-events-none ${transition} ${
-        isScrolled
-          ? "left-1/2 top-4 -translate-x-1/2"
-          : "left-0 right-0 top-0"
-      }`}
-    >
+    <div className="fixed left-1/2 top-4 -translate-x-1/2 z-50 pointer-events-none">
       <nav
         ref={navRef}
-        className={`relative flex items-center pointer-events-auto ${transition}`}
+        className="relative flex items-center pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          width: isScrolled ? "auto" : "100%",
-          maxWidth: isScrolled ? "420px" : "100%",
+          transform: isScrolled ? "scaleX(0.85)" : "scaleX(1)",
+          transformOrigin: "center",
+          width: "100vw",
+          maxWidth: isScrolled ? "480px" : "100%",
           padding: isScrolled ? "0.5rem 1.5rem" : "1rem 1.5rem",
           borderRadius: isScrolled ? "9999px" : "0px",
-          justifyContent: isScrolled ? "center" : "space-between",
+          justifyContent: "space-between",
           background: isScrolled
             ? "rgba(10, 10, 10, 0.75)"
             : "transparent",
@@ -59,6 +53,7 @@ export default function Navbar() {
           boxShadow: isScrolled
             ? "0 8px 32px rgba(0, 0, 0, 0.4)"
             : "none",
+          willChange: "transform",
         }}
       >
         <div className="flex items-center">
@@ -78,7 +73,7 @@ export default function Navbar() {
               <button
                 key={nav.path}
                 onClick={() => router.push(nav.path)}
-                className={`relative z-10 px-3 sm:px-4 py-1.5 text-xs sm:text-sm border-none outline-none cursor-pointer select-none ${transition} hover:scale-105 font-[family-name:var(--font-geist-mono)]`}
+                className="relative z-10 px-3 sm:px-4 py-1.5 text-xs sm:text-sm border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 font-[family-name:var(--font-geist-mono)]"
                 style={{
                   background: "transparent",
                   color: isActive
