@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { technologies, type Technology } from "@/app/lib/technologies";
 
@@ -21,21 +21,25 @@ interface TechnologiesModalProps {
 export default function TechnologiesModal({ isOpen, onClose }: TechnologiesModalProps) {
   const [mounted, setMounted] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const prevIsOpen = useRef(isOpen);
   const modalRef = useRef<HTMLDivElement>(null);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
 
-  useEffect(() => {
-    if (isOpen) {
+  useLayoutEffect(() => {
+    if (isOpen && !prevIsOpen.current) {
       setMounted(true);
-      setTimeout(() => {
-        setIsVisible(true);
-      }, 10);
-    } else {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          setIsVisible(true);
+        });
+      });
+    } else if (!isOpen && prevIsOpen.current) {
       setIsVisible(false);
       timeoutRef.current = setTimeout(() => {
         setMounted(false);
       }, 300);
     }
+    prevIsOpen.current = isOpen;
   }, [isOpen]);
 
   useEffect(() => {
