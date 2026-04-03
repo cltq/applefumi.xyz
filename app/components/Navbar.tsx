@@ -9,15 +9,34 @@ const navLinks = [
   { label: "Test", path: "/test" },
 ];
 
+function useWindowWidth() {
+  const [width, setWidth] = useState(0);
+  useEffect(() => {
+    const update = () => setWidth(window.innerWidth);
+    update();
+    window.addEventListener("resize", update, { passive: true });
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return width;
+}
+
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
+  const windowWidth = useWindowWidth();
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
   const activeLink =
     navLinks.find((item) => item.path === normalizedPath) || navLinks[0];
+
+  // Responsive pill width: ~55% of viewport, clamped between 260px and 520px.
+  // This ensures it looks proportional on mobile, tablet, and desktop alike.
+  const scrolledWidth =
+    windowWidth > 0
+      ? `${Math.min(Math.max(260, Math.round(windowWidth * 0.55)), 220)}px`
+      : "350px";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,11 +48,6 @@ export default function Navbar() {
   }, []);
 
   return (
-    /*
-     * Outer wrapper: ALWAYS left-0 right-0, flex justify-center.
-     * This is the key — the nav shrinks/grows within a stable full-width
-     * container, so both edges animate inward/outward symmetrically.
-     */
     <div
       className="fixed left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
       style={{
@@ -44,11 +58,9 @@ export default function Navbar() {
         ref={navRef}
         className="flex items-center justify-between pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
         style={{
-          // Width drives the "compress from both sides" animation.
-          // No maxWidth — width alone handles it.
-          width: isScrolled ? "300px" : "100%",
+          width: isScrolled ? scrolledWidth : "100%",
           padding: isScrolled ? "0.5rem 1.5rem" : "1rem 2rem",
-          borderRadius: isScrolled ? "9999px" : "0px",
+          borderRadius: isScrolled ? "500px" : "0px",
           background: isScrolled
             ? "rgba(255, 255, 255, 0.1)"
             : "transparent",
