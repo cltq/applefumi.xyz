@@ -16,7 +16,6 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-  const isFirstRender = useRef(true);
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
   const activeLink =
@@ -24,7 +23,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      setIsScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -33,27 +32,33 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    isFirstRender.current = true;
-  }, [pathname]);
-
   return (
-    <div className="fixed top-3 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex justify-center z-50 pointer-events-none">
+    <div
+      className={`fixed left-0 right-0 flex justify-center z-50 transition-all duration-500 ease-out pointer-events-none ${
+        isScrolled ? "top-4" : "top-0"
+      }`}
+    >
       <nav
         ref={navRef}
-        className="relative flex items-center gap-0.5 px-2 sm:px-2.5 py-1.5 sm:py-2 rounded-[65px] pointer-events-auto transition-all duration-300 ease-out"
+        className="relative flex items-center gap-2 sm:gap-3 px-4 sm:px-6 py-2 sm:py-2.5 pointer-events-auto transition-all duration-500 ease-out"
         style={{
           ...glassmorphism,
           ...glassmorphismBorder,
-          boxShadow: isScrolled
-            ? "0 8px 32px rgba(255, 255, 255, 0.01), inset 0 1px 0 rgba(255,255,255,0.15)"
-            : "0 0 0 rgba(0,0,0,0)",
           width: isScrolled ? "auto" : "100%",
-          maxWidth: isScrolled ? "none" : "480px",
+          maxWidth: isScrolled ? "none" : "100%",
+          borderRadius: isScrolled ? "9999px" : "0px",
           justifyContent: isScrolled ? "center" : "space-between",
+          background: isScrolled
+            ? "rgba(10, 10, 10, 0.75)"
+            : "rgba(10, 10, 10, 0.85)",
+          backdropFilter: isScrolled ? "blur(16px)" : "blur(0px)",
+          WebkitBackdropFilter: isScrolled ? "blur(16px)" : "blur(0px)",
+          boxShadow: isScrolled
+            ? "0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255,255,255,0.1)"
+            : "0 0 0 rgba(0,0,0,0)",
         }}
       >
-        <div className="pl-1.5 sm:pl-2">
+        <div className="flex items-center">
           <Image
             src="/vercel.svg"
             alt="logo"
@@ -63,38 +68,52 @@ export default function Navbar() {
           />
         </div>
 
-        {navLinks.map((nav) => {
-          const isActive = activeLink.path === nav.path;
-          return (
-            <button
-              key={nav.path}
-              onClick={() => router.push(nav.path)}
-              className="relative z-10 px-3 sm:px-4 py-1.5 rounded-[65px] text-xs sm:text-sm border-none outline-none cursor-pointer select-none transition-all duration-250 ease-in-out hover:scale-105 hover:text-white font-[family-name:var(--font-geist-mono)]"
-              style={{
-                background: "transparent",
-                color: isActive ? "rgba(255,255,255,0.98)" : "rgba(255,255,255,0.78)",
-                fontWeight: isActive ? 700 : 500,
-                letterSpacing: "0.01em",
-                textShadow: isActive ? "0 0 10px rgba(252, 253, 253, 0.85)" : "none",
-                transition: "color 0.18s ease, transform 0.25s ease, text-shadow 0.25s ease",
-              }}
-              onMouseEnter={(e) => {
-                if (!isActive) {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.98)";
-                  (e.currentTarget as HTMLButtonElement).style.textShadow = "0 0 8px rgba(255, 255, 255, 0.8)";
-                }
-              }}
-              onMouseLeave={(e) => {
-                if (!isActive) {
-                  (e.currentTarget as HTMLButtonElement).style.color = "rgba(255,255,255,0.78)";
-                  (e.currentTarget as HTMLButtonElement).style.textShadow = "none";
-                }
-              }}
-            >
-              {nav.label}
-            </button>
-          );
-        })}
+        <div className="flex items-center gap-1 sm:gap-0.5">
+          {navLinks.map((nav) => {
+            const isActive = activeLink.path === nav.path;
+            return (
+              <button
+                key={nav.path}
+                onClick={() => router.push(nav.path)}
+                className="relative z-10 px-3 sm:px-4 py-1.5 text-xs sm:text-sm border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 font-[family-name:var(--font-geist-mono)]"
+                style={{
+                  background: "transparent",
+                  color: isActive
+                    ? "rgba(255,255,255,0.98)"
+                    : "rgba(255,255,255,0.78)",
+                  fontWeight: isActive ? 700 : 500,
+                  letterSpacing: "0.01em",
+                  textShadow: isActive
+                    ? "0 0 12px rgba(255, 255, 255, 0.6)"
+                    : "none",
+                  transition:
+                    "color 0.2s ease, transform 0.25s ease, text-shadow 0.25s ease",
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive) {
+                    (
+                      e.currentTarget as HTMLButtonElement
+                    ).style.color = "rgba(255,255,255,0.98)";
+                    (
+                      e.currentTarget as HTMLButtonElement
+                    ).style.textShadow = "0 0 8px rgba(255, 255, 255, 0.5)";
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive) {
+                    (
+                      e.currentTarget as HTMLButtonElement
+                    ).style.color = "rgba(255,255,255,0.78)";
+                    (e.currentTarget as HTMLButtonElement).style.textShadow =
+                      "none";
+                  }
+                }}
+              >
+                {nav.label}
+              </button>
+            );
+          })}
+        </div>
       </nav>
     </div>
   );
