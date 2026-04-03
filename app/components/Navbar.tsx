@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const navLinks = [
   { label: "Home", path: "/" },
-  { label: "About", path: "/about" },
+  // { label: "About", path: "/about" },
   { label: "Test", path: "/test" },
 ];
 
@@ -61,11 +61,6 @@ export default function Navbar() {
           WebkitBackdropFilter: isScrolled
             ? "blur(20px) saturate(180%)"
             : "blur(0px)",
-          // Keep border always present but transparent when not scrolled
-          // so the transition animates smoothly instead of snapping.
-          border: isScrolled
-            ? "1px solid rgba(255,255,255,0.1)"
-            : "1px solid transparent",
           boxShadow: "none",
           willChange: "width, border-radius, background",
         }}
