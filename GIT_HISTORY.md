@@ -1,5 +1,9 @@
 # Git History
 
+## 2026-04-25
+
+- Commit - "Update: fix haunt.gg button not working on mobile/tablet - Files changed: app/components/Navbar.tsx"
+
 ## 2026-04-03
 
 - Commit - "Update: Remove Cloudflare import from next.config.ts to fix Vercel build error - Files changed: next.config.ts"

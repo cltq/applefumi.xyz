@@ -1,5 +1,9 @@
 # Agent History
 
+## 2026-04-25
+
+- Agent: Antigravity (Claude Sonnet 4.6) | User requested: "can you fix the haunt.gg link button at the topbar doesnt work on phone and tablet devices" | Agent response: Fixed the haunt.gg button by opening the window synchronously before the async fetch call. Mobile browsers block window.open() when called after an await (outside user gesture), so we open with the fallback URL first then update the window location once the API responds. | Action: Updated app/components/Navbar.tsx, Updated GIT_HISTORY.md, Updated AGENTS_HISTORY.md
+
 ## 2026-04-03
 
 - Agent: GitHub Copilot | User requested: "remove everything that is use cloudflare to deploy and remove from packages.json too because im going to use vercel" | Agent response: Removed Cloudflare deployment scripts, dependencies, and config files from package.json, deleted open-next.config.ts and wrangler.jsonc. | Action: Updated package.json, Deleted open-next.config.ts, Deleted wrangler.jsonc
