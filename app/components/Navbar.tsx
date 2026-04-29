@@ -35,7 +35,7 @@ export default function Navbar() {
         {/* Logo — left side */}
         <button
           onClick={() => router.push("/")}
-          className="cursor-pointer hover:scale-110 transition-transform duration-200 flex-shrink-0 mr-4"
+          className="cursor-pointer hover:scale-110 transition-transform duration-200 flex-shrink-0 mr-8"
         >
           <Image
             src="/favicon.ico"
@@ -54,7 +54,7 @@ export default function Navbar() {
               <button
                 key={nav.path}
                 onClick={() => router.push(nav.path)}
-                className="relative z-10 px-3 sm:px-2 py-2 border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 rounded-md bg-transparent"
+                className="relative z-10 px-3 sm:px-3 py-2 border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 rounded-md bg-transparent"
               >
                 <span
                   className={`text-sm tracking-wide ${
@@ -93,7 +93,7 @@ export default function Navbar() {
               console.error("Failed to fetch redirect URL:", error);
             }
           }}
-          className="cursor-pointer hover:scale-110 transition-transform duration-200 flex-shrink-0"
+          className="cursor-pointer hover:scale-110 transition-transform duration-200 flex-shrink-0 ml-8"
         >
           <Image
             src="/hauntgg.png"
