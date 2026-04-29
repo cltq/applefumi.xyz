@@ -1,6 +1,6 @@
 # fumi-web
 
-Personal website built with Next.js, React, TypeScript, and Tailwind CSS. Deployed on Cloudflare Workers.
+Personal website built with Next.js, React, TypeScript, and Tailwind CSS. Deployed on Vercel
 
 ## Tech Stack
 
