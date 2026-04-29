@@ -1,5 +1,5 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -9,72 +9,34 @@ const navLinks = [
   { label: "Test", path: "/test" },
 ];
 
-function useWindowWidth() {
-  const [width, setWidth] = useState(0);
-  useEffect(() => {
-    const update = () => setWidth(window.innerWidth);
-    update();
-    window.addEventListener("resize", update, { passive: true });
-    return () => window.removeEventListener("resize", update);
-  }, []);
-  return width;
-}
-
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
-  const windowWidth = useWindowWidth();
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
   const activeLink =
     navLinks.find((item) => item.path === normalizedPath) || navLinks[0];
 
-  // Responsive pill width: ~55% of viewport, clamped between 260px and 520px.
-  // This ensures it looks proportional on mobile, tablet, and desktop alike.
-  const scrolledWidth =
-    windowWidth > 0
-      ? `${Math.min(Math.max(260, Math.round(windowWidth * 0.55)), 220)}px`
-      : "350px";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div
-      className="fixed left-0 right-0 z-50 flex justify-center pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+      className="fixed left-0 right-0 z-50 flex justify-center pointer-events-none"
       style={{
-        top: isScrolled ? "1rem" : "0",
+        top: "1rem",
       }}
     >
       <nav
         ref={navRef}
-        className="flex items-center justify-between pointer-events-auto transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+        className="flex items-center justify-between pointer-events-auto"
         style={{
-          width: isScrolled ? scrolledWidth : "100%",
-          padding: isScrolled ? "0.5rem 1.2rem" : "1rem 2rem",
-          borderRadius: isScrolled ? "500px" : "0px",
-          background: isScrolled
-            ? "rgba(255, 255, 255, 0.1)"
-            : "transparent",
-          border: isScrolled
-            ? "1px solid rgba(255,255,255,0.2)"
-            : "1px solid transparent",
-          backdropFilter: isScrolled
-            ? "blur(20px) saturate(180%)"
-            : "blur(0px)",
-          WebkitBackdropFilter: isScrolled
-            ? "blur(20px) saturate(180%)"
-            : "blur(0px)",
+          width: "auto",
+          padding: "0.5rem 1.2rem",
+          borderRadius: "500px",
+          background: "rgba(255, 255, 255, 0.1)",
+          border: "1px solid rgba(255,255,255,0.2)",
+          backdropFilter: "blur(20px) saturate(180%)",
+          WebkitBackdropFilter: "blur(20px) saturate(180%)",
           boxShadow: "none",
-          willChange: "width, border-radius, background",
         }}
       >
         {/* Logo — left side */}
