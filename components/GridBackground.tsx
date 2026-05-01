@@ -1,11 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { animate } from "animejs";
 
 export default function GridBackground() {
   const ref = useRef<HTMLDivElement>(null);
-  const glowRef = useRef<{ scale: number }>({ scale: 1 });
   const [active, setActive] = useState(false);
 
   useEffect(() => {
@@ -19,12 +17,11 @@ export default function GridBackground() {
     let rafId: number;
 
     const animateLoop = () => {
-      currentX += (mouseX - currentX) * 0.2; // fast follow
+      currentX += (mouseX - currentX) * 0.2;
       currentY += (mouseY - currentY) * 0.2;
 
       el.style.setProperty("--x", `${currentX}px`);
       el.style.setProperty("--y", `${currentY}px`);
-      el.style.setProperty("--glow-scale", `${glowRef.current.scale}`);
 
       rafId = requestAnimationFrame(animateLoop);
     };
@@ -34,23 +31,14 @@ export default function GridBackground() {
     const handleMove = (e: MouseEvent) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
-      setActive(true); // enable effect after first move
+      setActive(true);
     };
 
     window.addEventListener("mousemove", handleMove);
 
-    // Breathing glow effect with anime.js
-    const breathingAnim = animate(glowRef.current, {
-      scale: [1, 1.25, 1],
-      duration: 3000,
-      ease: "inOutSine",
-      loop: true,
-    });
-
     return () => {
       window.removeEventListener("mousemove", handleMove);
       cancelAnimationFrame(rafId);
-      breathingAnim.pause();
     };
   }, []);
 
@@ -61,7 +49,6 @@ export default function GridBackground() {
       style={{
         ["--x" as string]: "50%",
         ["--y" as string]: "50%",
-        ["--glow-scale" as string]: "1",
       }}
     >
       {/* Base grid — fades in on mount */}
@@ -77,18 +64,18 @@ export default function GridBackground() {
         }}
       />
 
-      {/* Brighter grid near cursor */}
+      {/* Brighter grid near cursor - using CSS animation for breathing */}
       {active && (
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]"
           style={{
             backgroundImage: `
               linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
               linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)
             `,
             backgroundSize: "48px 48px",
-            maskImage: `radial-gradient(circle calc(160px * var(--glow-scale)) at var(--x) var(--y), white, transparent 70%)`,
-            WebkitMaskImage: `radial-gradient(circle calc(160px * var(--glow-scale)) at var(--x) var(--y), white, transparent 70%)`,
+            maskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
+            WebkitMaskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
           }}
         />
       )}
@@ -96,15 +83,15 @@ export default function GridBackground() {
       {/* Thicker grid near cursor */}
       {active && (
         <div
-          className="absolute inset-0"
+          className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]"
           style={{
             backgroundImage: `
               linear-gradient(rgba(255,255,255,0.16) 2px, transparent 2px),
               linear-gradient(90deg, rgba(255,255,255,0.16) 2px, transparent 2px)
             `,
             backgroundSize: "48px 48px",
-            maskImage: `radial-gradient(circle calc(100px * var(--glow-scale)) at var(--x) var(--y), white, transparent 70%)`,
-            WebkitMaskImage: `radial-gradient(circle calc(100px * var(--glow-scale)) at var(--x) var(--y), white, transparent 70%)`,
+            maskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
+            WebkitMaskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
           }}
         />
       )}
