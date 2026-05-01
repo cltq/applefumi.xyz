@@ -54,7 +54,16 @@ export default function Navbar() {
               <button
                 key={nav.path}
                 onClick={() => router.push(nav.path)}
-                className="relative z-10 px-3 sm:px-3 py-2 border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 rounded-md bg-transparent"
+                className="relative z-10 px-3 sm:px-3 py-2 border-none outline-none cursor-pointer select-none transition-all duration-300 ease-in-out hover:scale-105 rounded-md"
+                style={
+                  isActive
+                    ? {
+                        background: "rgba(216, 180, 254, 0.15)",
+                        boxShadow:
+                          "0 0 0 1px rgba(216, 180, 254, 0.45), 0 0 10px rgba(216, 180, 254, 0.12)",
+                      }
+                    : { background: "transparent" }
+                }
               >
                 <span
                   className={`text-sm tracking-wide ${
@@ -64,7 +73,7 @@ export default function Navbar() {
                   }`}
                   style={{
                     textShadow: isActive
-                      ? "0 0 16px rgba(255, 255, 255, 0.5)"
+                      ? "0 0 16px rgba(216, 180, 254, 0.6)"
                       : "none",
                   }}
                 >
