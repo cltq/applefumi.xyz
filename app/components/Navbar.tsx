@@ -61,6 +61,7 @@ export default function Navbar() {
                         background: "rgba(216, 180, 254, 0.15)",
                         boxShadow:
                           "0 0 0 1px rgba(216, 180, 254, 0.45), 0 0 10px rgba(216, 180, 254, 0.12)",
+                        borderRadius: "9999px",
                       }
                     : { background: "transparent" }
                 }
