@@ -1,14 +1,7 @@
 import { Suspense } from "react";
-import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-
-const DiscordWidget = dynamic(() => import("./components/DiscordWidget"), {
-  ssr: false,
-  loading: () => (
-    <div className="w-full h-full rounded-lg bg-zinc-800/50 animate-pulse" />
-  ),
-});
+import DiscordWidget from "./components/DiscordWidget";
 
 export default function Home() {
   return (
