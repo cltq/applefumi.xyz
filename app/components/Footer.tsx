@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import { socialIcons } from "@/app/lib/social-icons";
 import { socialLinks, type SocialLink } from "@/app/lib/social-links";
@@ -9,22 +9,31 @@ import TechnologiesModal from "./TechnologiesModal";
 
 export default function Footer() {
   const year = new Date().getFullYear();
-  const [links, setLinks] = useState<SocialLink[]>([]);
+  const [links, setLinks] = useState<SocialLink[]>(socialLinks);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  useEffect(() => {
-    const fetchLinks = async () => {
+  const fetchLinks = useCallback(async () => {
+    try {
       const responses = await Promise.all(
         socialLinks.map((link) => fetch(link.href))
       );
       const data = await Promise.all(responses.map((res) => res.json()));
-      setLinks(data.map((item, i) => ({
-        label: socialLinks[i].label,
-        href: item.url,
-      })));
-    };
-    fetchLinks();
+      setLinks(
+        data.map((item, i) => ({
+          label: socialLinks[i].label,
+          href: item.url,
+        }))
+      );
+    } catch {
+      // Keep fallback links on error
+    }
   }, []);
+
+  useEffect(() => {
+    // Defer fetch until after initial paint
+    const id = requestIdleCallback(() => fetchLinks(), { timeout: 2000 });
+    return () => cancelIdleCallback(id);
+  }, [fetchLinks]);
 
   return (
     <>

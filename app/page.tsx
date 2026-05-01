@@ -1,6 +1,14 @@
-import Image from "next/image";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+
+const DiscordWidget = dynamic(() => import("./components/DiscordWidget"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-full rounded-lg bg-zinc-800/50 animate-pulse" />
+  ),
+});
 
 export default function Home() {
   return (
@@ -23,12 +31,13 @@ export default function Home() {
         </div>
 
         <div className="w-full max-w-[240px] sm:max-w-[280px] md:max-w-sm lg:max-w-md aspect-[340/220] shrink-0 mt-4 sm:mt-0">
-          <iframe
-            className="w-full h-full rounded-lg border-none"
-            title="Discord user embed"
-            sandbox="allow-scripts"
-            src="https://widgets.vendicated.dev/user?id=969088519161139270&theme=dark&banner=true&full-banner=true&rounded-corners=true&discord-icon=true&badges=true&guess-nitro=true&"
-          />
+          <Suspense
+            fallback={
+              <div className="w-full h-full rounded-lg bg-zinc-800/50 animate-pulse" />
+            }
+          >
+            <DiscordWidget />
+          </Suspense>
         </div>
       </main>
       <Footer />
