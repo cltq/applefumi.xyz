@@ -18,15 +18,15 @@ const kanit = Kanit({
 
 export const metadata: Metadata = {
   title: "Fumi",
-  description: "Hi, I am Celestia (cltq) - Developer and creator.",
+  description: "Hi, I am Fumi - Developer",
   icons: {
     icon: "/favicon.ico",
   },
-  metadataBase: new URL("https://fumi.vercel.app"),
+  metadataBase: new URL("https://fumi.moocom.site"),
   openGraph: {
     title: "Fumi",
-    description: "Hi, I am Celestia (cltq) - Developer and creator.",
-    url: "https://fumi.vercel.app",
+    description: "Hi, I am Fumi - Developer",
+    url: "https://fumi.moocom.site",
     siteName: "Fumi",
     images: [
       {
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fumi",
-    description: "Hi, I am Celestia (cltq) - Developer and creator.",
+    description: "Hi, I am Fumi - Developer",
     images: ["/og.jpg"],
   },
   robots: {
