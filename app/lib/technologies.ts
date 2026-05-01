@@ -60,4 +60,16 @@ export const technologies: Technology[] = [
     url: "https://fonts.google.com/specimen/Kanit",
     category: "font",
   },
+  {
+    name: "Framer Motion",
+    description: "Production-ready motion library for React animations and gestures",
+    url: "https://motion.dev",
+    category: "library",
+  },
+  {
+    name: "anime.js",
+    description: "Lightweight JavaScript animation library for fine-grained DOM effects",
+    url: "https://animejs.com",
+    category: "library",
+  },
 ];

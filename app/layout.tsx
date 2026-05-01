@@ -5,6 +5,7 @@ import { GeistPixelSquare } from "geist/font/pixel";
 import { Kanit } from "next/font/google";
 import Title from "@/components/Title";
 import GridBackground from "@/components/GridBackground";
+import PageTransition from "@/components/PageTransition";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
@@ -73,7 +74,9 @@ export default function RootLayout({
         <GridBackground />
         <div className="relative z-10">
           <Title />
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </div>
         <Analytics />
         <SpeedInsights />

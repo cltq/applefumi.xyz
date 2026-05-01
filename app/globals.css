@@ -68,3 +68,12 @@ body {
 
   background-size: 40px 40px, 40px 40px, 100% 100%;
 }
+
+@keyframes gridFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

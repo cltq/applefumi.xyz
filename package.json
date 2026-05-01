@@ -1,6 +1,6 @@
 {
-  "name": "fumi",
-  "version": "0.1.0",
+  "name": "applefumi.xyz",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "next build",
@@ -11,6 +11,8 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "animejs": "^4.4.1",
+    "framer-motion": "^12.38.0",
     "geist": "^1.7.0",
     "next": "16.2.1",
     "react": "19.2.4",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/animejs": "^3.1.13",
     "@types/node": "^20",
     "@types/react": "^19",
     "eslint": "^9",

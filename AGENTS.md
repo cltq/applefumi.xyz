@@ -125,20 +125,5 @@ This project does not currently have a test suite. If adding tests:
 - Primary deployment target: **Vercel**
 - Connect GitHub repository to Vercel for automatic deployments
 
-## Git
-- Commit with message every time the code or files changed
-- Commit message format: "Update: [user message] - Files changed: [list of files]"
-- Log every commit in `GIT_HISTORY.md` with timestamp, description, and files changed
-- Exception: AGENTS.md, .agents/CLAUDE.md, .agents/GEMINI.md should commit with message and push automatically if changed
-- If "git status" shows local commits NOT present with remote, push GIT_HISTORY.md and AGENTS_HISTORY.md
-
-## Agent History
-- Log every agent action in `AGENTS_HISTORY.md` with:
-  1. Agent used
-  2. User requested message
-  3. Agent response
-  4. Everything the agent does
-- Log every git commit in `GIT_HISTORY.md` with timestamp, description, and files changed
-
 ## Antigravity Claude or Gemini
 - Don't do the Histories logging, i will handle it 
