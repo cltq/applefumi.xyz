@@ -58,9 +58,9 @@ export default function Navbar() {
                 style={
                   isActive
                     ? {
-                        background: "rgba(216, 180, 254, 0.15)",
+                        background: "rgba(255, 255, 255, 0.1)",
                         boxShadow:
-                          "0 0 0 1px rgba(216, 180, 254, 0.45), 0 0 10px rgba(216, 180, 254, 0.12)",
+                          "0 0 0 1px rgba(255, 255, 255, 0.35), 0 0 10px rgba(255, 255, 255, 0.08)",
                         borderRadius: "9999px",
                       }
                     : { background: "transparent" }
@@ -74,7 +74,7 @@ export default function Navbar() {
                   }`}
                   style={{
                     textShadow: isActive
-                      ? "0 0 16px rgba(216, 180, 254, 0.6)"
+                      ? "0 0 16px rgba(255, 255, 255, 0.5)"
                       : "none",
                   }}
                 >
