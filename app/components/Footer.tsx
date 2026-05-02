@@ -46,9 +46,16 @@ export default function Footer() {
   }, []);
 
   useEffect(() => {
-    // Defer fetch until after initial paint
-    const id = requestIdleCallback(() => fetchLinks(), { timeout: 2000 });
-    return () => cancelIdleCallback(id);
+    // Defer fetch until after initial paint, with Safari fallback
+    let cleanup: () => void;
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      const id = requestIdleCallback(() => fetchLinks(), { timeout: 2000 });
+      cleanup = () => cancelIdleCallback(id);
+    } else {
+      const id = setTimeout(() => fetchLinks(), 2000);
+      cleanup = () => clearTimeout(id);
+    }
+    return cleanup;
   }, [fetchLinks]);
 
   // Staggered icon entrance animation with anime.js
@@ -72,7 +79,7 @@ export default function Footer() {
     <>
       <motion.footer
         className="w-full mt-auto py-[10px] sm:py-[14px] px-[10px] sm:px-[22px]"
-        style={{ ...glassmorphism, ...glassmorphismBorderTop }}
+        style={{ ...glassmorphism, ...glassmorphismBorderTop, paddingBottom: 'calc(10px + env(safe-area-inset-bottom))' }}
         variants={footerVariants}
         initial="hidden"
         whileInView="visible"
@@ -115,7 +122,7 @@ export default function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block p-2 rounded-full transition-colors duration-200"
+                  className="block p-3 sm:p-2 rounded-full transition-colors duration-200 min-h-[44px] min-w-[44px] flex items-center justify-center"
                   style={{ color: "rgba(255, 255, 255, 0.6)" }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.color = "rgba(255, 255, 255, 0.95)";

@@ -7,16 +7,18 @@ export default function DiscordWidget() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Delay iframe load until after initial paint with fallback for older browsers
-    if ("requestIdleCallback" in window) {
+    // Delay iframe load until after initial paint, with Safari fallback
+    let cleanup: () => void;
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
       const timer = requestIdleCallback(() => setIsVisible(true), {
         timeout: 1000,
       });
-      return () => cancelIdleCallback(timer);
+      cleanup = () => cancelIdleCallback(timer);
     } else {
       const timer = setTimeout(() => setIsVisible(true), 100);
-      return () => clearTimeout(timer);
+      cleanup = () => clearTimeout(timer);
     }
+    return cleanup;
   }, []);
 
   return (

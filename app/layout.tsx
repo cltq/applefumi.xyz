@@ -2,18 +2,19 @@ import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { GeistPixelSquare } from "geist/font/pixel";
-import { Kanit } from "next/font/google";
+import { Chakra_Petch } from "next/font/google";
 import Title from "@/components/Title";
 import GridBackground from "@/components/GridBackground";
 import PageTransition from "@/components/PageTransition";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { LanguageProvider } from "@/app/contexts/LanguageContext";
 import "./globals.css";
 
-const kanit = Kanit({
+const chakraPetch = Chakra_Petch({
   weight: ["400", "500", "600", "700"],
   subsets: ["thai", "latin"],
-  variable: "--font-kanit",
+  variable: "--font-chakra-petch",
   display: "swap",
 });
 
@@ -55,6 +56,7 @@ export const metadata: Metadata = {
 export const viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -66,18 +68,20 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${kanit.variable}`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${chakraPetch.variable}`}
     >
-      <body className="relative min-h-screen text-white">
-        <GridBackground />
-        <div className="relative z-10">
-          <Title />
-          <PageTransition>
-            {children}
-          </PageTransition>
-        </div>
-        <Analytics />
-        <SpeedInsights />
+      <body className="relative min-h-screen text-white" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
+        <LanguageProvider>
+          <GridBackground />
+          <div className="relative z-10">
+            <Title />
+            <PageTransition>
+              {children}
+            </PageTransition>
+          </div>
+          <Analytics />
+          <SpeedInsights />
+        </LanguageProvider>
       </body>
     </html>
   );

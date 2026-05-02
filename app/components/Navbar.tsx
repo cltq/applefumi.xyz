@@ -39,7 +39,7 @@ export default function Navbar() {
     <div
       className="fixed left-0 right-0 z-50 flex justify-center pointer-events-none"
       style={{
-        top: "1rem",
+        top: "max(1rem, env(safe-area-inset-top))",
       }}
     >
       <motion.nav
@@ -57,18 +57,18 @@ export default function Navbar() {
         {/* Logo — left side */}
         <motion.button
           onClick={() => router.push("/")}
-          className="cursor-pointer flex-shrink-0"
+          className="cursor-pointer flex-shrink-0 mr-1 sm:mr-2"
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
         >
           <Image
-            src="/favicon.ico"
-            alt="logo"
-            width={24}
-            height={24}
-            className="w-5 h-5 sm:w-7 sm:h-7"
-          />
+             src="/favicon.ico"
+             alt="logo"
+             width={32}
+             height={32}
+             className="w-8 h-8 sm:w-7 sm:h-7"
+           />
         </motion.button>
 
         {/* Nav links */}
@@ -79,7 +79,7 @@ export default function Navbar() {
               <button
                 key={nav.path}
                 onClick={() => router.push(nav.path)}
-                className="relative z-10 px-2.5 py-1 border-none outline-none cursor-pointer select-none rounded-md"
+                className="relative z-10 px-3 py-2 border-none outline-none cursor-pointer select-none rounded-md min-h-[44px] min-w-[44px] flex items-center justify-center"
               >
                 {/* Animated active pill background */}
                 {isActive && (
@@ -135,19 +135,19 @@ export default function Navbar() {
               console.error("Failed to fetch redirect URL:", error);
             }
           }}
-          className="cursor-pointer flex-shrink-0"
-          whileHover={{ scale: 1.15 }}
-          whileTap={{ scale: 0.95 }}
-          transition={{ type: "spring", stiffness: 400, damping: 17 }}
-        >
-          <Image
-            src="/hauntgg.png"
-            alt="logo"
-            width={25}
-            height={25}
-            className="w-5 h-5 sm:w-7 sm:h-7"
-          />
-        </motion.button>
+           className="cursor-pointer flex-shrink-0 ml-1 sm:ml-2"
+           whileHover={{ scale: 1.15 }}
+           whileTap={{ scale: 0.95 }}
+           transition={{ type: "spring", stiffness: 400, damping: 17 }}
+         >
+           <Image
+              src="/hauntgg.png"
+              alt="logo"
+              width={32}
+              height={32}
+              className="w-8 h-8 sm:w-7 sm:h-7"
+            />
+         </motion.button>
       </motion.nav>
     </div>
   );
