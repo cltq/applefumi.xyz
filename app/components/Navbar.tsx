@@ -99,7 +99,7 @@ export default function Navbar() {
                   />
                 )}
                 <span
-                  className={`relative z-10 text-sm tracking-wide transition-all duration-300 ${
+                  className={`relative z-10 text-base sm:text-sm tracking-wide transition-all duration-300 ${
                     isActive
                       ? "text-white font-semibold"
                       : "text-white/60 font-normal hover:text-white/80"

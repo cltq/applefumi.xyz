@@ -88,14 +88,14 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
           <div className="flex flex-col items-center sm:items-start gap-1">
             <p
-              className="text-xs sm:text-sm font-[family-name:var(--font-geist-pixel-square)]"
+              className="text-sm sm:text-xs font-[family-name:var(--font-geist-pixel-square)]"
               style={{ color: "rgba(255, 255, 255, 0.6)" }}
             >
               &copy; {year} Fumi. All rights reserved.
             </p>
             <motion.button
               onClick={() => setIsModalOpen(true)}
-              className="text-[10px] sm:text-xs font-[family-name:var(--font-geist-mono)] cursor-pointer"
+              className="text-xs sm:text-[10px] font-[family-name:var(--font-geist-mono)] cursor-pointer"
               style={{ color: "rgba(255, 255, 255, 0.4)" }}
               whileHover={{
                 color: "rgba(255, 255, 255, 0.7)",
