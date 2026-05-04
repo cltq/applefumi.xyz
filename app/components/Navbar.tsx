@@ -103,7 +103,7 @@ export default function Navbar() {
                     isActive
                       ? "text-white font-semibold"
                       : "text-white/60 font-normal hover:text-white/80"
-                  }`
+                  }`}
                   style={{
                     textShadow: isActive
                       ? "0 0 16px rgba(255, 255, 255, 0.5)"
