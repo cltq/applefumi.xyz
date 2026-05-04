@@ -59,28 +59,28 @@ export default function HomeContent() {
         animate="visible"
       >
         <motion.h1
-          className="max-w-xs sm:max-w-sm md:max-w-md text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-7 sm:leading-8 md:leading-10 tracking-tight text-white font-[family-name:var(--font-chakra-petch)]"
+          className="max-w-xs sm:max-w-sm md:max-w-md text-2xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-8 sm:leading-8 md:leading-10 tracking-tight text-white font-[family-name:var(--font-chakra-petch)]"
           style={{ textShadow: "0 0 30px rgba(255, 255, 255, 0.7), 0 0 60px rgba(255, 255, 255, 0.4), 0 0 80px rgba(255, 255, 255, 0.2)" }}
           variants={fadeUpVariants}
         >
           Welcome! ยินดีต้อนรับ!
         </motion.h1>
         <motion.p
-          className="max-w-xs sm:max-w-sm md:max-w-md text-sm sm:text-base md:text-lg leading-6 sm:leading-7 md:leading-8 text-zinc-200 font-[family-name:var(--font-chakra-petch)]"
+          className="max-w-xs sm:max-w-sm md:max-w-md text-base sm:text-sm md:text-lg leading-7 sm:leading-6 md:leading-8 text-zinc-200 font-[family-name:var(--font-chakra-petch)]"
           style={{ textShadow: "0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3)" }}
           variants={fadeUpVariants}
         >
-          Welcome to my personal website! But unfortunately, it's still a work in progress. Come back later!
+          Welcome to my personal website! But unfortunately, it&apos;s still a work in progress. Come back later!
         </motion.p>
         <motion.p
-          className="max-w-xs sm:max-w-sm md:max-w-md text-sm sm:text-base md:text-lg leading-6 sm:leading-7 md:leading-8 text-zinc-200 font-[family-name:var(--font-chakra-petch)]"
+          className="max-w-xs sm:max-w-sm md:max-w-md text-base sm:text-sm md:text-lg leading-7 sm:leading-6 md:leading-8 text-zinc-200 font-[family-name:var(--font-chakra-petch)]"
           style={{ textShadow: "0 0 15px rgba(255, 255, 255, 0.5), 0 0 30px rgba(255, 255, 255, 0.3)" }}
           variants={fadeUpVariants}
         >
           เว็บไซต์ส่วนตัวยังอยู่ในระหว่างการพัฒนา โปรดกลับมาใหม่ในภายหลัง.
         </motion.p>
         <motion.p
-          className="max-w-xs sm:max-w-sm md:max-w-md text-xs sm:text-sm md:text-base lg:text-xl leading-5 sm:leading-6 md:leading-7 lg:leading-8 text-zinc-400"
+          className="max-w-xs sm:max-w-sm md:max-w-md text-sm sm:text-xs md:text-base lg:text-xl leading-6 sm:leading-5 md:leading-7 lg:leading-8 text-zinc-400"
           variants={fadeUpVariants}
         >
           <span className="font-[family-name:var(--font-geist-pixel-square)]">Visit my bio: </span><a href="https://haunt.gg/fumi" className="text-blue-500 hover:underline font-[family-name:var(--font-geist-pixel-square)]">Here</a>
