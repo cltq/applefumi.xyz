@@ -130,7 +130,9 @@ export default function Footer() {
                   onMouseLeave={(e) => {
                     e.currentTarget.style.color = "rgba(255, 255, 255, 0.6)";
                   }}
+                  aria-label={`Visit ${social.label}`}
                 >
+                  <span className="sr-only">{social.label}</span>
                   {socialIcons[social.label.toLowerCase()]}
                 </Link>
               </motion.div>
