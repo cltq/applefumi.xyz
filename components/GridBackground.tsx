@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function GridBackground() {
   const ref = useRef<HTMLDivElement>(null);
@@ -8,19 +8,6 @@ export default function GridBackground() {
   const rafIdRef = useRef<number>(0);
   const mouseRef = useRef({ x: 0, y: 0 });
   const currentRef = useRef({ x: 0, y: 0 });
-
-  const animateLoop = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-
-    currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * 0.15;
-    currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * 0.15;
-
-    el.style.setProperty("--x", `${currentRef.current.x}px`);
-    el.style.setProperty("--y", `${currentRef.current.y}px`);
-
-    rafIdRef.current = requestAnimationFrame(animateLoop);
-  }, []);
 
   useEffect(() => {
     const el = ref.current;
@@ -32,12 +19,27 @@ export default function GridBackground() {
     mouseRef.current = { x: initialX, y: initialY };
     currentRef.current = { x: initialX, y: initialY };
 
+    let running = false;
+
+    const animateLoop = () => {
+      if (!el) return;
+
+      currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * 0.15;
+      currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * 0.15;
+
+      el.style.setProperty("--x", `${currentRef.current.x}px`);
+      el.style.setProperty("--y", `${currentRef.current.y}px`);
+
+      rafIdRef.current = requestAnimationFrame(animateLoop);
+    };
+
     const handleMove = (e: MouseEvent) => {
       mouseRef.current.x = e.clientX;
       mouseRef.current.y = e.clientY;
-      
+
       // Only start animation loop on first interaction
-      if (!active) {
+      if (!running) {
+        running = true;
         setActive(true);
         rafIdRef.current = requestAnimationFrame(animateLoop);
       }
@@ -52,7 +54,7 @@ export default function GridBackground() {
         cancelAnimationFrame(rafIdRef.current);
       }
     };
-  }, [active, animateLoop]);
+  }, []);
 
   return (
     <div
