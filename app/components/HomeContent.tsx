@@ -8,8 +8,8 @@ const containerVariants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
+      staggerChildren: 0.08,
+      delayChildren: 0.1,
     },
   },
 };
@@ -17,16 +17,16 @@ const containerVariants = {
 const fadeUpVariants = {
   hidden: {
     opacity: 0,
-    y: 20,
-    filter: "blur(8px)",
+    y: 16,
+    filter: "blur(6px)",
   },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 0.6,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
+      duration: 0.4,
+      ease: [0.16, 1, 0.3, 1] as const,
     },
   },
 };
@@ -34,17 +34,17 @@ const fadeUpVariants = {
 const slideInRightVariants = {
   hidden: {
     opacity: 0,
-    x: 40,
-    scale: 0.96,
+    x: 30,
+    scale: 0.97,
   },
   visible: {
     opacity: 1,
     x: 0,
     scale: 1,
     transition: {
-      duration: 0.7,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
-      delay: 0.5,
+      duration: 0.5,
+      ease: [0.16, 1, 0.3, 1] as const,
+      delay: 0.25,
     },
   },
 };
