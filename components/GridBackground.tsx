@@ -1,46 +1,58 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 
 export default function GridBackground() {
   const ref = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(false);
+  const rafIdRef = useRef<number>(0);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const currentRef = useRef({ x: 0, y: 0 });
+
+  const animateLoop = useCallback(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    currentRef.current.x += (mouseRef.current.x - currentRef.current.x) * 0.15;
+    currentRef.current.y += (mouseRef.current.y - currentRef.current.y) * 0.15;
+
+    el.style.setProperty("--x", `${currentRef.current.x}px`);
+    el.style.setProperty("--y", `${currentRef.current.y}px`);
+
+    rafIdRef.current = requestAnimationFrame(animateLoop);
+  }, []);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    let mouseX = window.innerWidth / 2;
-    let mouseY = window.innerHeight / 2;
-    let currentX = mouseX;
-    let currentY = mouseY;
-    let rafId: number;
-
-    const animateLoop = () => {
-      currentX += (mouseX - currentX) * 0.15;
-      currentY += (mouseY - currentY) * 0.15;
-
-      el.style.setProperty("--x", `${currentX}px`);
-      el.style.setProperty("--y", `${currentY}px`);
-
-      rafId = requestAnimationFrame(animateLoop);
-    };
-
-    animateLoop();
+    // Initialize positions without starting animation loop
+    const initialX = typeof window !== 'undefined' ? window.innerWidth / 2 : 0;
+    const initialY = typeof window !== 'undefined' ? window.innerHeight / 2 : 0;
+    mouseRef.current = { x: initialX, y: initialY };
+    currentRef.current = { x: initialX, y: initialY };
 
     const handleMove = (e: MouseEvent) => {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-      setActive(true);
+      mouseRef.current.x = e.clientX;
+      mouseRef.current.y = e.clientY;
+      
+      // Only start animation loop on first interaction
+      if (!active) {
+        setActive(true);
+        rafIdRef.current = requestAnimationFrame(animateLoop);
+      }
     };
 
-    window.addEventListener("mousemove", handleMove);
+    // Use passive listener for better scroll/interaction performance
+    window.addEventListener("mousemove", handleMove, { passive: true });
 
     return () => {
       window.removeEventListener("mousemove", handleMove);
-      cancelAnimationFrame(rafId);
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
     };
-  }, []);
+  }, [active, animateLoop]);
 
   return (
     <div
@@ -49,51 +61,54 @@ export default function GridBackground() {
       style={{
         ["--x" as string]: "50%",
         ["--y" as string]: "50%",
+        contain: "strict",
       }}
     >
-      {/* Base grid — fades in on mount */}
+      {/* Base grid — CSS only, no JS animation */}
       <div
-        className="absolute inset-0 animate-[gridFadeIn_0.8s_ease-out_forwards]"
+        className="absolute inset-0"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
             linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)
           `,
           backgroundSize: "48px 48px",
+          animation: "gridFadeIn 0.8s ease-out forwards",
           opacity: 0,
+          willChange: "opacity",
         }}
       />
 
-      {/* Brighter grid near cursor - using CSS animation for breathing */}
+      {/* Interactive grid layers - only render when active */}
       {active && (
-        <div
-          className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)
-            `,
-            backgroundSize: "48px 48px",
-            maskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
-            WebkitMaskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
-          }}
-        />
-      )}
-
-      {/* Thicker grid near cursor */}
-      {active && (
-        <div
-          className="absolute inset-0 animate-[pulse_3s_ease-in-out_infinite]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(255,255,255,0.16) 2px, transparent 2px),
-              linear-gradient(90deg, rgba(255,255,255,0.16) 2px, transparent 2px)
-            `,
-            backgroundSize: "48px 48px",
-            maskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
-            WebkitMaskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
-          }}
-        />
+        <>
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)
+              `,
+              backgroundSize: "48px 48px",
+              maskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
+              WebkitMaskImage: `radial-gradient(circle 160px at var(--x) var(--y), white, transparent 70%)`,
+              willChange: "mask-image",
+            }}
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `
+                linear-gradient(rgba(255,255,255,0.16) 2px, transparent 2px),
+                linear-gradient(90deg, rgba(255,255,255,0.16) 2px, transparent 2px)
+              `,
+              backgroundSize: "48px 48px",
+              maskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
+              WebkitMaskImage: `radial-gradient(circle 100px at var(--x) var(--y), white, transparent 70%)`,
+              willChange: "mask-image",
+            }}
+          />
+        </>
       )}
     </div>
   );
