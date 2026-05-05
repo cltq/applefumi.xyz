@@ -61,13 +61,15 @@ export default function Navbar() {
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          aria-label="Go to homepage"
         >
           <Image
              src="/favicon.ico"
-             alt="logo"
+             alt="Fumi logo"
              width={32}
              height={32}
              className="w-8 h-8 sm:w-7 sm:h-7"
+             priority
            />
         </motion.button>
 
@@ -139,10 +141,11 @@ export default function Navbar() {
            whileHover={{ scale: 1.15 }}
            whileTap={{ scale: 0.95 }}
            transition={{ type: "spring", stiffness: 400, damping: 17 }}
+           aria-label="Visit Haunt.gg profile"
          >
            <Image
               src="/hauntgg.png"
-              alt="logo"
+              alt="Haunt.gg logo"
               width={32}
               height={32}
               className="w-8 h-8 sm:w-7 sm:h-7"
