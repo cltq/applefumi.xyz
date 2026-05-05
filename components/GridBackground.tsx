@@ -17,8 +17,8 @@ export default function GridBackground() {
     let rafId: number;
 
     const animateLoop = () => {
-      currentX += (mouseX - currentX) * 0.2;
-      currentY += (mouseY - currentY) * 0.2;
+      currentX += (mouseX - currentX) * 0.15;
+      currentY += (mouseY - currentY) * 0.15;
 
       el.style.setProperty("--x", `${currentX}px`);
       el.style.setProperty("--y", `${currentY}px`);
@@ -53,7 +53,7 @@ export default function GridBackground() {
     >
       {/* Base grid — fades in on mount */}
       <div
-        className="absolute inset-0 animate-[gridFadeIn_1.2s_ease-out_forwards]"
+        className="absolute inset-0 animate-[gridFadeIn_0.8s_ease-out_forwards]"
         style={{
           backgroundImage: `
             linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
