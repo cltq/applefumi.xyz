@@ -16,7 +16,6 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [autoDetect, setAutoDetectState] = useState(true);
-  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
     // Defer localStorage access to not block rendering
@@ -40,7 +39,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
       } catch {
         // localStorage unavailable
       }
-      setIsInitialized(true);
     };
 
     // Use requestIdleCallback for non-critical initialization
