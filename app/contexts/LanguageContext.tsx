@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from "react";
 
 type Language = "en" | "th";
 
@@ -16,36 +16,59 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>("en");
   const [autoDetect, setAutoDetectState] = useState(true);
+  const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    // Load saved preferences
-    const savedLang = localStorage.getItem("fumi-language") as Language | null;
-    const savedAuto = localStorage.getItem("fumi-auto-detect");
+    // Defer localStorage access to not block rendering
+    const init = () => {
+      try {
+        const savedLang = localStorage.getItem("fumi-language") as Language | null;
+        const savedAuto = localStorage.getItem("fumi-auto-detect");
 
-    if (savedAuto !== null) {
-      setAutoDetectState(savedAuto === "true");
-    }
+        if (savedAuto !== null) {
+          setAutoDetectState(savedAuto === "true");
+        }
 
-    if (savedLang && !savedAuto) {
-      setLanguageState(savedLang);
-    } else if (savedAuto === null || savedAuto === "true") {
-      // Auto detect from browser
-      const browserLang = navigator.language.toLowerCase();
-      if (browserLang.startsWith("th")) {
-        setLanguageState("th");
+        if (savedLang && savedAuto === "false") {
+          setLanguageState(savedLang);
+        } else if (savedAuto === null || savedAuto === "true") {
+          const browserLang = navigator.language.toLowerCase();
+          if (browserLang.startsWith("th")) {
+            setLanguageState("th");
+          }
+        }
+      } catch {
+        // localStorage unavailable
       }
+      setIsInitialized(true);
+    };
+
+    // Use requestIdleCallback for non-critical initialization
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      requestIdleCallback(init, { timeout: 100 });
+    } else {
+      // Fallback for Safari
+      setTimeout(init, 0);
     }
   }, []);
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("fumi-language", lang);
-    localStorage.setItem("fumi-auto-detect", "false");
-  };
+    try {
+      localStorage.setItem("fumi-language", lang);
+      localStorage.setItem("fumi-auto-detect", "false");
+    } catch {
+      // localStorage unavailable
+    }
+  }, []);
 
-  const setAutoDetect = (auto: boolean) => {
+  const setAutoDetect = useCallback((auto: boolean) => {
     setAutoDetectState(auto);
-    localStorage.setItem("fumi-auto-detect", String(auto));
+    try {
+      localStorage.setItem("fumi-auto-detect", String(auto));
+    } catch {
+      // localStorage unavailable
+    }
     if (auto) {
       const browserLang = navigator.language.toLowerCase();
       if (browserLang.startsWith("th")) {
@@ -54,7 +77,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
         setLanguageState("en");
       }
     }
-  };
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage, autoDetect, setAutoDetect }}>

@@ -1,23 +1,15 @@
-import dynamic from "next/dynamic";
-
-const Navbar = dynamic(() => import("./components/Navbar"), {
-  ssr: true,
-});
-
-const Footer = dynamic(() => import("./components/Footer"), {
-  ssr: true,
-});
-
-const HomeContent = dynamic(() => import("./components/HomeContent"), {
-  ssr: true,
-  loading: () => <Loading />,
-});
+import { Suspense } from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomeContent from "./components/HomeContent";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen items-center text-zinc-100 font-sans">
       <Navbar />
-      <HomeContent />
+      <Suspense fallback={<Loading />}>
+        <HomeContent />
+      </Suspense>
       <Footer />
     </div>
   );

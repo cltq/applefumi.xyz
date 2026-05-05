@@ -2,31 +2,16 @@
 
 import { useEffect, useState, useCallback, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { animate, stagger } from "animejs";
 import { socialIcons } from "@/app/lib/social-icons";
 import { socialLinks, type SocialLink } from "@/app/lib/social-links";
 import { glassmorphism, glassmorphismBorderTop } from "@/app/lib/styles";
 import TechnologiesModal from "./TechnologiesModal";
-
-const footerVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.46, 0.45, 0.94] as const,
-    },
-  },
-};
 
 export default function Footer() {
   const year = new Date().getFullYear();
   const [links, setLinks] = useState<SocialLink[]>(socialLinks);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const iconsRef = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
 
   const fetchLinks = useCallback(async () => {
     try {
@@ -58,32 +43,11 @@ export default function Footer() {
     return cleanup;
   }, [fetchLinks]);
 
-  // Staggered icon entrance animation with anime.js
-  useEffect(() => {
-    if (hasAnimated.current || !iconsRef.current) return;
-    const icons = iconsRef.current.querySelectorAll("[data-social-icon]");
-    if (icons.length === 0) return;
-    hasAnimated.current = true;
-
-    animate(icons, {
-      opacity: [0, 1],
-      translateY: [12, 0],
-      scale: [0.8, 1],
-      delay: stagger(80, { start: 600 }),
-      duration: 500,
-      ease: "outCubic",
-    });
-  }, [links]);
-
   return (
     <>
-      <motion.footer
-        className="w-full mt-auto py-[10px] sm:py-[14px] px-[10px] sm:px-[22px]"
+      <footer
+        className="w-full mt-auto py-[10px] sm:py-[14px] px-[10px] sm:px-[22px] animate-slideUp"
         style={{ ...glassmorphism, ...glassmorphismBorderTop, paddingBottom: 'calc(10px + env(safe-area-inset-bottom))' }}
-        variants={footerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-40px" }}
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
           <div className="flex flex-col items-center sm:items-start gap-1">
@@ -93,30 +57,29 @@ export default function Footer() {
             >
               &copy; {year} Fumi. All rights reserved.
             </p>
-            <motion.button
+            <button
               onClick={() => setIsModalOpen(true)}
-              className="text-xs sm:text-[10px] font-[family-name:var(--font-geist-mono)] cursor-pointer"
+              className="text-xs sm:text-[10px] font-[family-name:var(--font-geist-mono)] cursor-pointer transition-colors duration-200 hover:text-white/70"
               style={{ color: "rgba(255, 255, 255, 0.4)" }}
-              whileHover={{
-                color: "rgba(255, 255, 255, 0.7)",
-                textShadow: "0 0 8px rgba(255, 255, 255, 0.2)",
-              }}
-              transition={{ duration: 0.2 }}
             >
               View all technologies
-            </motion.button>
+            </button>
           </div>
           <div ref={iconsRef} className="flex items-center gap-4">
-            {links.map((social) => (
-              <motion.div
+            {links.map((social, index) => (
+              <div
                 key={social.label}
-                data-social-icon
-                style={{ opacity: 0 }}
-                whileHover={{
-                  scale: 1.2,
-                  filter: "drop-shadow(0 0 6px rgba(255, 255, 255, 0.3))",
+                className="animate-fadeUp hover:scale-[1.2] transition-transform duration-150"
+                style={{ 
+                  animationDelay: `${600 + index * 80}ms`,
+                  filter: "drop-shadow(0 0 0 transparent)",
                 }}
-                transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.filter = "drop-shadow(0 0 6px rgba(255, 255, 255, 0.3))";
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.filter = "drop-shadow(0 0 0 transparent)";
+                }}
               >
                 <Link
                   href={social.href}
@@ -135,11 +98,11 @@ export default function Footer() {
                   <span className="sr-only">{social.label}</span>
                   {socialIcons[social.label.toLowerCase()]}
                 </Link>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>
-      </motion.footer>
+      </footer>
       <TechnologiesModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
