@@ -8,7 +8,6 @@ import GridBackground from "@/components/GridBackground";
 import PageTransition from "@/components/PageTransition";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { LanguageProvider } from "@/app/contexts/LanguageContext";
 import "./globals.css";
 
 const chakraPetch = Chakra_Petch({
@@ -32,10 +31,10 @@ export const metadata: Metadata = {
     siteName: "Fumi",
     images: [
       {
-        url: "/og.jpg",
+        url: "/api/og",
         width: 1200,
         height: 630,
-        alt: "Fumi - Celestia (cltq)",
+        alt: "Fumi - Welcome",
       },
     ],
     locale: "en_US",
@@ -45,7 +44,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fumi",
     description: "Hi, I am Fumi - Developer",
-    images: ["/og.jpg"],
+    images: ["/api/og"],
   },
   robots: {
     index: true,
@@ -71,7 +70,6 @@ export default function RootLayout({
       className={`${GeistSans.variable} ${GeistMono.variable} ${GeistPixelSquare.variable} ${chakraPetch.variable}`}
     >
       <body className="relative min-h-screen text-white" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-        <LanguageProvider>
           <GridBackground />
           <div className="relative z-10">
             <Title />
@@ -81,7 +79,6 @@ export default function RootLayout({
           </div>
           <Analytics />
           <SpeedInsights />
-        </LanguageProvider>
       </body>
     </html>
   );
