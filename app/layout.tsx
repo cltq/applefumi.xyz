@@ -19,15 +19,15 @@ const chakraPetch = Chakra_Petch({
 
 export const metadata: Metadata = {
   title: "Fumi",
-  description: "Hi, I am Fumi - Developer",
+  description: "Hi, I am Fumi",
   icons: {
     icon: "/favicon.ico",
   },
-  metadataBase: new URL("https://fumi.moocom.site"),
+  metadataBase: new URL("https://applefumi.xyz"),
   openGraph: {
     title: "Fumi",
-    description: "Hi, I am Fumi - Developer",
-    url: "https://fumi.moocom.site",
+    description: "Hi, I am Fumi",
+    url: "https://applefumi.xyz",
     siteName: "Fumi",
     images: [
       {
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Fumi",
-    description: "Hi, I am Fumi - Developer",
+    description: "Hi, I am Fumi",
     images: ["/api/og"],
   },
   robots: {

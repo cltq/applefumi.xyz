@@ -2,12 +2,111 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
-import { useCallback, useState } from "react";
+import { useCallback, useState, ReactElement } from "react";
 
-const navLinks = [
+const NAV_LINKS = [
   { label: "Home", path: "/" },
   { label: "Test", path: "/test" },
 ];
+
+const NAV_STYLES = {
+  container:
+    "w-full max-w-3xl rounded-2xl border border-white/10 bg-black/70 shadow-[0_0_50px_rgba(0,0,0,0.4)]",
+  topBar: "flex items-center px-4 py-3 md:px-6 md:py-3",
+  spacer: "flex-1",
+};
+
+interface NavLinkProps {
+  nav: (typeof NAV_LINKS)[0];
+  isActive: boolean;
+  onClick: () => void;
+}
+
+function DesktopNavLink({ nav, isActive, onClick }: NavLinkProps): ReactElement {
+  return (
+    <button
+      key={nav.path}
+      onClick={onClick}
+      className="relative text-sm font-medium transition-all duration-200"
+    >
+      <span className={isActive ? "text-white" : "text-white/60 hover:text-white"}>
+        {nav.label}
+      </span>
+      <div
+        className={`absolute -bottom-2 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-white transition-all duration-300 ${
+          isActive ? "w-full opacity-100" : "w-0 opacity-0"
+        }`}
+      />
+    </button>
+  );
+}
+
+function NavbarLogo({
+  isHovered,
+  onClick,
+  onHoverEnter,
+  onHoverLeave,
+}: {
+  isHovered: string | null;
+  onClick: () => void;
+  onHoverEnter: () => void;
+  onHoverLeave: () => void;
+}): ReactElement {
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={onHoverEnter}
+      onMouseLeave={onHoverLeave}
+      className="flex items-center justify-center transition-transform duration-200"
+      style={{
+        transform: isHovered === "logo" ? "scale(1.08)" : "scale(1)",
+      }}
+      aria-label="Go to homepage"
+    >
+      <Image
+        src="/favicon.ico"
+        alt="Fumi logo"
+        width={36}
+        height={36}
+        className="rounded-lg"
+        priority
+      />
+    </button>
+  );
+}
+
+function HauntButton({
+  isHovered,
+  onClick,
+  onHoverEnter,
+  onHoverLeave,
+}: {
+  isHovered: string | null;
+  onClick: () => void;
+  onHoverEnter: () => void;
+  onHoverLeave: () => void;
+}): ReactElement {
+  return (
+    <button
+      onClick={onClick}
+      onMouseEnter={onHoverEnter}
+      onMouseLeave={onHoverLeave}
+      className="flex items-center justify-center transition-transform duration-200"
+      style={{
+        transform: isHovered === "haunt" ? "scale(1.08)" : "scale(1)",
+      }}
+      aria-label="Visit Haunt.gg profile"
+    >
+      <Image
+        src="/hauntgg.png"
+        alt="Haunt.gg logo"
+        width={36}
+        height={36}
+        className="rounded-lg"
+      />
+    </button>
+  );
+}
 
 export default function Navbar() {
   const router = useRouter();
@@ -15,8 +114,7 @@ export default function Navbar() {
   const [isHovered, setIsHovered] = useState<string | null>(null);
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
-  const activeLink =
-    navLinks.find((item) => item.path === normalizedPath) || navLinks[0];
+  const activeLink = NAV_LINKS.find((item) => item.path === normalizedPath) || NAV_LINKS[0];
 
   const handleHauntClick = useCallback(async () => {
     const win = window.open(
@@ -24,9 +122,11 @@ export default function Navbar() {
       "_blank",
       "noopener,noreferrer"
     );
+
     try {
       const response = await fetch("/api/s/haunt");
       const data = await response.json();
+
       if (data.url && win && !win.closed) {
         win.location.href = data.url;
       }
@@ -37,100 +137,57 @@ export default function Navbar() {
 
   return (
     <div
-      className="fixed left-0 right-0 z-50 flex justify-center pointer-events-none animate-slideDown"
+      className="fixed inset-x-0 z-50 flex justify-center px-4"
       style={{
         top: "max(1rem, env(safe-area-inset-top))",
       }}
     >
-      <nav
-        className="flex items-center gap-3 pointer-events-auto px-5 py-2 rounded-full"
-        style={{
-          background: "rgba(255, 255, 255, 0.1)",
-          border: "1px solid rgba(255,255,255,0.2)",
-          backdropFilter: "blur(20px) saturate(180%)",
-          WebkitBackdropFilter: "blur(20px) saturate(180%)",
-        }}
-      >
-        {/* Logo — left side */}
-        <button
-          onClick={() => router.push("/")}
-          onMouseEnter={() => setIsHovered("logo")}
-          onMouseLeave={() => setIsHovered(null)}
-          className="cursor-pointer flex-shrink-0 mr-1 sm:mr-2 transition-transform duration-150"
-          style={{
-            transform: isHovered === "logo" ? "scale(1.15)" : "scale(1)",
-          }}
-          aria-label="Go to homepage"
-        >
-          <Image
-            src="/favicon.ico"
-            alt="Fumi logo"
-            width={32}
-            height={32}
-            className="w-8 h-8 sm:w-7 sm:h-7"
-            priority
-          />
-        </button>
+      <nav className={NAV_STYLES.container}>
+        {/* TOP BAR */}
+        <div className={NAV_STYLES.topBar}>
+          {/* LEFT */}
+          <div className="flex items-center gap-3 flex-shrink-0">
+            <NavbarLogo
+              isHovered={isHovered}
+              onClick={() => router.push("/")}
+              onHoverEnter={() => setIsHovered("logo")}
+              onHoverLeave={() => setIsHovered(null)}
+            />
+            <span
+              className="text-xl font-bold tracking-tight text-white"
+              style={{
+                textShadow: "0 0 20px rgba(255,255,255,0.2)",
+              }}
+            >
+              AppleFumi
+            </span>
+          </div>
 
-        {/* Nav links */}
-        <div className="flex items-center gap-1">
-          {navLinks.map((nav) => {
-            const isActive = activeLink.path === nav.path;
-            return (
-              <button
+          {/* SPACER */}
+          <div className={NAV_STYLES.spacer} />
+
+          {/* DESKTOP NAV */}
+          <div className="flex items-center gap-8 mr-6">
+            {NAV_LINKS.map((nav) => (
+              <DesktopNavLink
                 key={nav.path}
+                nav={nav}
+                isActive={activeLink.path === nav.path}
                 onClick={() => router.push(nav.path)}
-                className="relative z-10 px-3 py-2 border-none outline-none cursor-pointer select-none rounded-md min-h-[44px] min-w-[44px] flex items-center justify-center"
-              >
-                {/* Active pill background */}
-                {isActive && (
-                  <div
-                    className="absolute inset-0 rounded-full transition-all duration-200"
-                    style={{
-                      background: "rgba(255, 255, 255, 0.1)",
-                      boxShadow:
-                        "0 0 0 1px rgba(255, 255, 255, 0.35), 0 0 10px rgba(255, 255, 255, 0.08)",
-                    }}
-                  />
-                )}
-                <span
-                  className={`relative z-10 text-base sm:text-sm tracking-wide transition-all duration-200 ${
-                    isActive
-                      ? "text-white font-semibold"
-                      : "text-white/60 font-normal hover:text-white/80"
-                  }`}
-                  style={{
-                    textShadow: isActive
-                      ? "0 0 16px rgba(255, 255, 255, 0.5)"
-                      : "none",
-                  }}
-                >
-                  {nav.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+              />
+            ))}
+          </div>
 
-        {/* Haunt logo — right side */}
-        <button
-          onClick={handleHauntClick}
-          onMouseEnter={() => setIsHovered("haunt")}
-          onMouseLeave={() => setIsHovered(null)}
-          className="cursor-pointer flex-shrink-0 ml-1 sm:ml-2 transition-transform duration-150"
-          style={{
-            transform: isHovered === "haunt" ? "scale(1.15)" : "scale(1)",
-          }}
-          aria-label="Visit Haunt.gg profile"
-        >
-          <Image
-            src="/hauntgg.png"
-            alt="Haunt.gg logo"
-            width={32}
-            height={32}
-            className="w-8 h-8 sm:w-7 sm:h-7"
-          />
-        </button>
+          {/* RIGHT */}
+          <div className="flex items-center">
+            <HauntButton
+              isHovered={isHovered}
+              onClick={handleHauntClick}
+              onHoverEnter={() => setIsHovered("haunt")}
+              onHoverLeave={() => setIsHovered(null)}
+            />
+          </div>
+        </div>
       </nav>
     </div>
   );

@@ -51,19 +51,21 @@ export default function Footer() {
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
           <div className="flex flex-col items-center sm:items-start gap-1">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="text-xs font-[family-name:var(--font-geist-mono)] cursor-pointer transition-colors duration-200 hover:text-white/70"
+              style={{ color: "rgba(255, 255, 255, 0.4)" }}
+            >
+              View used technologies
+            </button>
+          </div>
+          <div className="flex flex-col items-center gap-1">
             <p
               className="text-sm sm:text-xs font-[family-name:var(--font-geist-pixel-square)]"
               style={{ color: "rgba(255, 255, 255, 0.6)" }}
             >
-              {year} applefumi.xyz &copy; Fumi. All rights reserved.
+              {year} &copy; Fumi. All rights reserved.
             </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="text-xs sm:text-[10px] font-[family-name:var(--font-geist-mono)] cursor-pointer transition-colors duration-200 hover:text-white/70"
-              style={{ color: "rgba(255, 255, 255, 0.4)" }}
-            >
-              View all technologies
-            </button>
           </div>
           <div ref={iconsRef} className="flex items-center gap-4">
             {links.map((social, index) => (
