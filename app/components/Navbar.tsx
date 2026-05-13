@@ -12,8 +12,8 @@ const NAV_LINKS = [
 
 const NAV_STYLES = {
   container:
-    "w-full max-w-3xl rounded-2xl border border-white/10 bg-black/70 shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)]",
-  topBar: "flex items-center px-4 py-3 md:px-6 md:py-3",
+    "w-full max-w-2xl rounded-full border border-white/12 bg-black/70 backdrop-blur-2xl shadow-[0_0_40px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist)]",
+  topBar: "flex items-center px-4 py-2 md:px-5 md:py-2",
   spacer: "flex-1",
 };
 
@@ -23,21 +23,21 @@ interface NavLinkProps {
   onClick: () => void;
 }
 
-function DesktopNavLink({ nav, isActive, onClick }: NavLinkProps): ReactElement {
+function DesktopNavLink({
+  nav,
+  isActive,
+  onClick,
+}: NavLinkProps): ReactElement {
   return (
     <button
-      key={nav.path}
       onClick={onClick}
-      className="relative px-3 py-1.5 text-sm font-medium transition-all duration-200"
+      className={`relative px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-200 ${
+        isActive
+          ? "bg-white/[0.06] border border-white/10 text-white"
+          : "text-white/60 hover:text-white hover:bg-white/[0.03]"
+      }`}
     >
-      <span className={`relative z-10 ${isActive ? "text-white" : "text-white/60 hover:text-white"}`}>
-        {nav.label}
-      </span>
-      <div
-        className={`absolute inset-0 rounded-md bg-white/10 transition-all duration-300 ${
-          isActive ? "opacity-100 scale-100" : "opacity-0 scale-95"
-        }`}
-      />
+      {nav.label}
     </button>
   );
 }
@@ -58,20 +58,36 @@ function NavbarLogo({
       onClick={onClick}
       onMouseEnter={onHoverEnter}
       onMouseLeave={onHoverLeave}
-      className="flex items-center justify-center transition-transform duration-200"
+      className="flex items-center gap-2 transition-transform duration-200"
       style={{
-        transform: isHovered === "logo" ? "scale(1.08)" : "scale(1)",
+        transform:
+          isHovered === "logo"
+            ? "scale(1.04)"
+            : "scale(1)",
       }}
       aria-label="Go to homepage"
     >
       <Image
         src="/favicon.ico"
         alt="Fumi logo"
-        width={36}
-        height={36}
-        className="rounded-lg"
+        width={32}
+        height={32}
+        className="rounded-full"
         priority
       />
+
+      <span
+        className="text-base md:text-lg font-bold tracking-tight text-white"
+        style={{
+          textShadow: `
+            0 0 8px rgba(255,255,255,0.45),
+            0 0 18px rgba(255,255,255,0.25),
+            0 0 30px rgba(255,255,255,0.12)
+          `,
+        }}
+      >
+        AppleFumi
+      </span>
     </button>
   );
 }
@@ -94,16 +110,19 @@ function HauntButton({
       onMouseLeave={onHoverLeave}
       className="flex items-center justify-center transition-transform duration-200"
       style={{
-        transform: isHovered === "haunt" ? "scale(1.08)" : "scale(1)",
+        transform:
+          isHovered === "haunt"
+            ? "scale(1.08)"
+            : "scale(1)",
       }}
       aria-label="Visit Haunt.gg profile"
     >
       <Image
         src="/hauntgg.png"
         alt="Haunt.gg logo"
-        width={36}
-        height={36}
-        className="rounded-lg"
+        width={32}
+        height={32}
+        className="rounded-full"
       />
     </button>
   );
@@ -112,11 +131,20 @@ function HauntButton({
 export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
-  const [isHovered, setIsHovered] = useState<string | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const normalizedPath = pathname?.replace(/\/$/, "") || "/";
-  const activeLink = NAV_LINKS.find((item) => item.path === normalizedPath) || NAV_LINKS[0];
+  const [isHovered, setIsHovered] =
+    useState<string | null>(null);
+
+  const [isMobileMenuOpen, setIsMobileMenuOpen] =
+    useState(false);
+
+  const normalizedPath =
+    pathname?.replace(/\/$/, "") || "/";
+
+  const activeLink =
+    NAV_LINKS.find(
+      (item) => item.path === normalizedPath
+    ) || NAV_LINKS[0];
 
   const handleHauntClick = useCallback(async () => {
     const win = window.open(
@@ -133,14 +161,20 @@ export default function Navbar() {
         win.location.href = data.url;
       }
     } catch (error) {
-      console.error("Failed to fetch redirect URL:", error);
+      console.error(
+        "Failed to fetch redirect URL:",
+        error
+      );
     }
   }, []);
 
-  const handleNavClick = useCallback((path: string) => {
-    router.push(path);
-    setIsMobileMenuOpen(false);
-  }, [router]);
+  const handleNavClick = useCallback(
+    (path: string) => {
+      router.push(path);
+      setIsMobileMenuOpen(false);
+    },
+    [router]
+  );
 
   return (
     <div
@@ -149,7 +183,9 @@ export default function Navbar() {
         top: "max(1rem, env(safe-area-inset-top))",
       }}
     >
-      <nav className={`${NAV_STYLES.container} relative`}>
+      <nav
+        className={`${NAV_STYLES.container} relative`}
+      >
         {/* TOP BAR */}
         <div className={NAV_STYLES.topBar}>
           {/* LEFT */}
@@ -157,94 +193,124 @@ export default function Navbar() {
             <NavbarLogo
               isHovered={isHovered}
               onClick={() => router.push("/")}
-              onHoverEnter={() => setIsHovered("logo")}
-              onHoverLeave={() => setIsHovered(null)}
+              onHoverEnter={() =>
+                setIsHovered("logo")
+              }
+              onHoverLeave={() =>
+                setIsHovered(null)
+              }
             />
-            <span
-              className="text-xl font-bold tracking-tight text-white"
-              style={{
-                textShadow: "0 0 20px rgba(255,255,255,0.2)",
-              }}
-            >
-              AppleFumi
-            </span>
           </div>
 
           {/* SPACER */}
           <div className={NAV_STYLES.spacer} />
 
           {/* DESKTOP NAV */}
-          <div className="hidden md:flex items-center gap-1 mr-5">
+          <div className="hidden md:flex items-center gap-2 mr-4">
             {NAV_LINKS.map((nav) => (
               <DesktopNavLink
                 key={nav.path}
                 nav={nav}
-                isActive={activeLink.path === nav.path}
-                onClick={() => router.push(nav.path)}
+                isActive={
+                  activeLink.path === nav.path
+                }
+                onClick={() =>
+                  router.push(nav.path)
+                }
               />
             ))}
           </div>
 
           {/* RIGHT */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             {/* MOBILE HAMBURGER */}
             <button
-              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
-              className="md:hidden flex items-center justify-center p-2 rounded-md transition-colors duration-200 hover:bg-white/10 min-h-[44px] min-w-[44px]"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              onClick={() =>
+                setIsMobileMenuOpen(
+                  (prev) => !prev
+                )
+              }
+              className="md:hidden relative flex items-center justify-center w-9 h-9"
+              aria-label={
+                isMobileMenuOpen
+                  ? "Close menu"
+                  : "Open menu"
+              }
               aria-expanded={isMobileMenuOpen}
             >
-              <div className="flex flex-col gap-[5px] w-5">
+              <div className="relative w-4 h-4">
                 <span
-                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
-                    isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
+                  className={`absolute left-0 top-1/2 h-[2px] w-4 rounded-full bg-white transition-all duration-300 ${
+                    isMobileMenuOpen
+                      ? "rotate-45"
+                      : "-translate-y-[5px]"
                   }`}
                 />
+
                 <span
-                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
-                    isMobileMenuOpen ? "opacity-0" : ""
+                  className={`absolute left-0 top-1/2 h-[2px] w-4 rounded-full bg-white transition-all duration-300 ${
+                    isMobileMenuOpen
+                      ? "opacity-0"
+                      : ""
                   }`}
                 />
+
                 <span
-                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
-                    isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                  className={`absolute left-0 top-1/2 h-[2px] w-4 rounded-full bg-white transition-all duration-300 ${
+                    isMobileMenuOpen
+                      ? "-rotate-45"
+                      : "translate-y-[5px]"
                   }`}
                 />
               </div>
             </button>
 
+            {/* HAUNT BUTTON */}
             <HauntButton
               isHovered={isHovered}
               onClick={handleHauntClick}
-              onHoverEnter={() => setIsHovered("haunt")}
-              onHoverLeave={() => setIsHovered(null)}
+              onHoverEnter={() =>
+                setIsHovered("haunt")
+              }
+              onHoverLeave={() =>
+                setIsHovered(null)
+              }
             />
           </div>
         </div>
 
-        {/* MOBILE DROPDOWN */}
+        {/* MOBILE FLOATING MENU */}
         <div
-          className={`md:hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 border border-white/10 bg-black/40 backdrop-blur-xl rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden absolute left-0 top-[calc(100%+10px)] w-full rounded-3xl border border-white/10 bg-black/75 backdrop-blur-3xl shadow-[0_0_40px_rgba(0,0,0,0.4)] overflow-hidden transition-all duration-300 ${
+            isMobileMenuOpen
+              ? "opacity-100 translate-y-0 pointer-events-auto"
+              : "opacity-0 -translate-y-2 pointer-events-none"
           }`}
         >
-            <div className="flex flex-col gap-1 p-2 items-center whitespace-nowrap">
+          <div className="px-5 py-5 flex flex-col items-center">
+            <div className="flex flex-col items-center gap-4 w-full">
               {NAV_LINKS.map((nav) => {
-                const isActive = activeLink.path === nav.path;
+                const isActive =
+                  activeLink.path === nav.path;
+
                 return (
                   <button
                     key={nav.path}
-                    onClick={() => handleNavClick(nav.path)}
-                    className={`text-center text-sm font-medium px-3 py-1.5 rounded-md transition-all duration-200 ${
-                      isActive ? "text-white" : "text-white/60 hover:text-white"
+                    onClick={() =>
+                      handleNavClick(nav.path)
+                    }
+                    className={`w-full rounded-full px-4 py-2.5 text-center text-base font-medium transition-all duration-200 ${
+                      isActive
+                        ? "bg-white/[0.06] border border-white/10 text-white"
+                        : "text-white/70 hover:text-white hover:bg-white/[0.03]"
                     }`}
-                    style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
                   >
                     {nav.label}
                   </button>
                 );
               })}
             </div>
+          </div>
         </div>
       </nav>
     </div>
