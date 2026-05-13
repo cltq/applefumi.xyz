@@ -227,11 +227,11 @@ export default function Navbar() {
 
         {/* MOBILE DROPDOWN */}
         <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
+          className={`md:hidden absolute left-1/2 -translate-x-1/2 w-[calc(100%+1.5rem)] transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 px-4 pb-2 pt-1 border-t border-white/10">
+          <div className="flex flex-col gap-1 px-4 pb-2 pt-1 mt-2 border border-white/10 bg-black/40 backdrop-blur-xl rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.4)]">
             {NAV_LINKS.map((nav) => {
               const isActive = activeLink.path === nav.path;
               return (
