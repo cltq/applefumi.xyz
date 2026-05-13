@@ -5,7 +5,7 @@ import DiscordWidget from "./DiscordWidget";
 
 export default function HomeContent() {
   return (
-    <main className="flex flex-1 w-full max-w-7xl flex-col items-center justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 text-zinc-100 sm:flex-row sm:items-center sm:justify-between gap-6 sm:gap-8 md:gap-12 mx-auto">
+    <main className="flex flex-1 w-full max-w-7xl flex-col items-center justify-center py-8 sm:py-12 md:py-16 px-4 sm:px-6 md:px-8 text-zinc-100 sm:flex-row sm:justify-between gap-6 sm:gap-8 md:gap-12 mx-auto">
       <div
         className="flex flex-col items-center gap-3 sm:gap-4 md:gap-6 text-center sm:items-start sm:text-left px-2 w-full sm:w-auto animate-staggerFadeIn"
       >
@@ -37,10 +37,10 @@ export default function HomeContent() {
       </div>
 
       <div
-        className="flex justify-center w-full sm:w-auto sm:flex-1 mt-4 sm:mt-0 animate-slideInRight"
+        className="w-full flex justify-center sm:w-auto sm:flex-1 mt-4 sm:mt-0 animate-slideInRight"
       >
         <div
-          className="w-full max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[340/220] sm:aspect-[400/260] shrink-0"
+          className="max-w-[280px] sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[340/220] sm:aspect-[400/260] shrink-0"
         >
           <Suspense
             fallback={
