@@ -30,10 +30,7 @@ function DesktopNavLink({ nav, isActive, onClick }: NavLinkProps): ReactElement 
       onClick={onClick}
       className="relative px-3 py-1.5 text-sm font-medium transition-all duration-200"
     >
-      <span
-        className={`relative z-10 ${isActive ? "text-white" : "text-white/60 hover:text-white"}`}
-        style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
-      >
+      <span className={`relative z-10 ${isActive ? "text-white" : "text-white/60 hover:text-white"}`}>
         {nav.label}
       </span>
       <div
@@ -166,7 +163,7 @@ export default function Navbar() {
             <span
               className="text-xl font-bold tracking-tight text-white"
               style={{
-                textShadow: "0 0 20px rgba(255,255,255,0.4), 0 0 40px rgba(255,255,255,0.2)",
+                textShadow: "0 0 20px rgba(255,255,255,0.2)",
               }}
             >
               AppleFumi
@@ -225,23 +222,22 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE DROPDOWN */}
+        {/* MOBILE SIDEBAR */}
         <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden absolute right-0 top-full border-x border-b border-white/10 bg-black/40 backdrop-blur-xl rounded-b-2xl rounded-t-none shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? "w-48 opacity-100" : "w-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 px-4 pb-2 pt-1 border-t border-white/10">
+          <div className="flex flex-col gap-1 p-4 whitespace-nowrap">
             {NAV_LINKS.map((nav) => {
               const isActive = activeLink.path === nav.path;
               return (
                 <button
                   key={nav.path}
                   onClick={() => handleNavClick(nav.path)}
-                  className={`px-2 py-1.5 text-xs font-medium text-right rounded-md transition-all duration-200 ${
+                  className={`px-3 py-2 text-sm font-medium text-right rounded-md transition-all duration-200 ${
                     isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
-                  style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
                 >
                   {nav.label}
                 </button>
