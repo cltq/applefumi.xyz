@@ -222,27 +222,29 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE SIDEBAR */}
+        {/* MOBILE DROPDOWN */}
         <div
-          className={`md:hidden absolute right-0 top-[calc(100%-1rem)] border-x border-b border-white/10 bg-black/40 backdrop-blur-xl rounded-b-2xl rounded-t-none shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "w-48 opacity-100" : "w-0 opacity-0"
+          className={`md:hidden transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 p-4 whitespace-nowrap">
-            {NAV_LINKS.map((nav) => {
-              const isActive = activeLink.path === nav.path;
-              return (
-                <button
-                  key={nav.path}
-                  onClick={() => handleNavClick(nav.path)}
-                  className={`px-3 py-2 text-sm font-medium text-right rounded-md transition-all duration-200 ${
-                    isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
-                  }`}
-                >
-                  {nav.label}
-                </button>
-              );
-            })}
+          <div className="flex justify-end px-4 pb-2 pt-1 border-t border-white/10">
+            <div className="flex flex-col gap-1 items-end">
+              {NAV_LINKS.map((nav) => {
+                const isActive = activeLink.path === nav.path;
+                return (
+                  <button
+                    key={nav.path}
+                    onClick={() => handleNavClick(nav.path)}
+                    className={`px-3 py-2 text-sm font-medium text-right rounded-md transition-all duration-200 ${
+                      isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
+                    }`}
+                  >
+                    {nav.label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
       </nav>
