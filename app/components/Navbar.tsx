@@ -224,7 +224,7 @@ export default function Navbar() {
 
         {/* MOBILE SIDEBAR */}
         <div
-          className={`md:hidden absolute right-0 top-full border-x border-b border-white/10 bg-black/40 backdrop-blur-xl rounded-b-2xl rounded-t-none shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
+          className={`md:hidden absolute right-0 top-[calc(100%-1rem)] border-x border-b border-white/10 bg-black/40 backdrop-blur-xl rounded-b-2xl rounded-t-none shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? "w-48 opacity-100" : "w-0 opacity-0"
           }`}
         >
