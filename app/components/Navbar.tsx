@@ -149,7 +149,7 @@ export default function Navbar() {
         top: "max(1rem, env(safe-area-inset-top))",
       }}
     >
-      <nav className={NAV_STYLES.container}>
+      <nav className={`${NAV_STYLES.container} relative`}>
         {/* TOP BAR */}
         <div className={NAV_STYLES.topBar}>
           {/* LEFT */}
@@ -222,20 +222,20 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* MOBILE MENU */}
+        {/* MOBILE SIDEBAR */}
         <div
-          className={`md:hidden overflow-hidden transition-all duration-300 ${
-            isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+          className={`md:hidden absolute right-0 top-0 h-auto min-h-full border-l border-white/10 bg-black/70 backdrop-blur-xl rounded-r-2xl transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 px-4 pb-3 pt-1 border-t border-white/10">
+          <div className="flex flex-col gap-1 pt-20 pb-4 px-4 whitespace-nowrap">
             {NAV_LINKS.map((nav) => {
               const isActive = activeLink.path === nav.path;
               return (
                 <button
                   key={nav.path}
                   onClick={() => handleNavClick(nav.path)}
-                  className={`relative px-3 py-2 text-sm font-medium text-left rounded-md transition-all duration-200 ${
+                  className={`px-3 py-2 text-sm font-medium text-right rounded-md transition-all duration-200 ${
                     isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
                   }`}
                 >
