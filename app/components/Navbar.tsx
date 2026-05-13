@@ -224,27 +224,26 @@ export default function Navbar() {
 
         {/* MOBILE DROPDOWN */}
         <div
-          className={`md:hidden transition-all duration-300 overflow-hidden ${
+          className={`md:hidden absolute left-1/2 -translate-x-1/2 top-full mt-2 border border-white/10 bg-black/40 backdrop-blur-xl rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
             isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="flex justify-end px-4 pb-2 pt-1 border-t border-white/10">
-            <div className="flex flex-col gap-1 items-end">
-              {NAV_LINKS.map((nav) => {
-                const isActive = activeLink.path === nav.path;
-                return (
-                  <button
-                    key={nav.path}
-                    onClick={() => handleNavClick(nav.path)}
-                    className={`px-3 py-2 text-sm font-medium text-right rounded-md transition-all duration-200 ${
-                      isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
-                    }`}
-                  >
-                    {nav.label}
-                  </button>
-                );
-              })}
-            </div>
+          <div className="flex flex-col gap-1 p-2 items-center">
+            {NAV_LINKS.map((nav) => {
+              const isActive = activeLink.path === nav.path;
+              return (
+                <button
+                  key={nav.path}
+                  onClick={() => handleNavClick(nav.path)}
+                  className={`text-sm font-medium rounded-md transition-all duration-200 ${
+                    isActive ? "text-white" : "text-white/60 hover:text-white"
+                  }`}
+                  style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
+                >
+                  {nav.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </nav>
