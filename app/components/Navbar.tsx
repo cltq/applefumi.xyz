@@ -11,7 +11,7 @@ const NAV_LINKS = [
 
 const NAV_STYLES = {
   container:
-    "w-full max-w-3xl rounded-2xl border border-white/10 bg-black/70 shadow-[0_0_50px_rgba(0,0,0,0.4)]",
+    "w-full max-w-3xl rounded-2xl border border-white/10 bg-black/70 shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)]",
   topBar: "flex items-center px-4 py-3 md:px-6 md:py-3",
   spacer: "flex-1",
 };
@@ -27,14 +27,14 @@ function DesktopNavLink({ nav, isActive, onClick }: NavLinkProps): ReactElement 
     <button
       key={nav.path}
       onClick={onClick}
-      className="relative text-sm font-medium transition-all duration-200"
+      className="relative px-3 py-1.5 text-sm font-medium transition-all duration-200"
     >
-      <span className={isActive ? "text-white" : "text-white/60 hover:text-white"}>
+      <span className={`relative z-10 ${isActive ? "text-white" : "text-white/60 hover:text-white"}`}>
         {nav.label}
       </span>
       <div
-        className={`absolute -bottom-2 left-1/2 h-[2px] -translate-x-1/2 rounded-full bg-white transition-all duration-300 ${
-          isActive ? "w-full opacity-100" : "w-0 opacity-0"
+        className={`absolute inset-0 rounded-md bg-white/10 transition-all duration-300 ${
+          isActive ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       />
     </button>
@@ -167,7 +167,7 @@ export default function Navbar() {
           <div className={NAV_STYLES.spacer} />
 
           {/* DESKTOP NAV */}
-          <div className="flex items-center gap-8 mr-6">
+          <div className="flex items-center gap-1 mr-5">
             {NAV_LINKS.map((nav) => (
               <DesktopNavLink
                 key={nav.path}

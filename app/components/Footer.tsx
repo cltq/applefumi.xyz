@@ -55,7 +55,7 @@ export default function Footer() {
               className="text-sm sm:text-xs font-[family-name:var(--font-geist-pixel-square)]"
               style={{ color: "rgba(255, 255, 255, 0.6)" }}
             >
-              {year} applefumi.xyz &copy; Fumi. All rights reserved.
+              &copy; {year} @fumiluvapples. All rights reserved.
             </p>
             <button
               onClick={() => setIsModalOpen(true)}

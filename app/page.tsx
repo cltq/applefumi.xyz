@@ -7,9 +7,11 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen items-center text-zinc-100 font-sans">
       <Navbar />
-      <Suspense fallback={<Loading />}>
-        <HomeContent />
-      </Suspense>
+      <main className="flex flex-1 w-full flex-col items-center">
+        <Suspense fallback={<Loading />}>
+          <HomeContent />
+        </Suspense>
+      </main>
       <Footer />
     </div>
   );
