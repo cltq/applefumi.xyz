@@ -224,11 +224,11 @@ export default function Navbar() {
 
         {/* MOBILE SIDEBAR */}
         <div
-          className={`md:hidden absolute right-0 top-0 h-auto min-h-full border-l border-white/10 bg-black/70 backdrop-blur-xl rounded-r-2xl transition-all duration-300 overflow-hidden ${
-            isMobileMenuOpen ? "translate-x-0 opacity-100" : "translate-x-full opacity-0"
+          className={`md:hidden absolute right-0 top-full mt-2 border border-white/10 bg-black/70 backdrop-blur-xl rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.4)] font-[family-name:var(--font-geist-mono)] transition-all duration-300 overflow-hidden ${
+            isMobileMenuOpen ? "w-48 opacity-100" : "w-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 pt-20 pb-4 px-4 whitespace-nowrap">
+          <div className="flex flex-col gap-1 p-4 whitespace-nowrap">
             {NAV_LINKS.map((nav) => {
               const isActive = activeLink.path === nav.path;
               return (
