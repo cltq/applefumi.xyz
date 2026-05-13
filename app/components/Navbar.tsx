@@ -228,23 +228,23 @@ export default function Navbar() {
             isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
           }`}
         >
-          <div className="flex flex-col gap-1 p-2 items-center">
-            {NAV_LINKS.map((nav) => {
-              const isActive = activeLink.path === nav.path;
-              return (
-                <button
-                  key={nav.path}
-                  onClick={() => handleNavClick(nav.path)}
-                  className={`text-sm font-medium rounded-md transition-all duration-200 ${
-                    isActive ? "text-white" : "text-white/60 hover:text-white"
-                  }`}
-                  style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
-                >
-                  {nav.label}
-                </button>
-              );
-            })}
-          </div>
+            <div className="flex flex-col gap-1 p-2 items-center whitespace-nowrap">
+              {NAV_LINKS.map((nav) => {
+                const isActive = activeLink.path === nav.path;
+                return (
+                  <button
+                    key={nav.path}
+                    onClick={() => handleNavClick(nav.path)}
+                    className={`text-center text-sm font-medium px-3 py-1.5 rounded-md transition-all duration-200 ${
+                      isActive ? "text-white" : "text-white/60 hover:text-white"
+                    }`}
+                    style={isActive ? { textShadow: "0 0 15px rgba(255,255,255,0.5)" } : undefined}
+                  >
+                    {nav.label}
+                  </button>
+                );
+              })}
+            </div>
         </div>
       </nav>
     </div>
