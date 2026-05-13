@@ -23,7 +23,7 @@ export default function DiscordWidget() {
 
   return (
     <motion.div
-      className="w-full h-full"
+      className="w-full h-full overflow-hidden"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{

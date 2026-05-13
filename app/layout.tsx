@@ -18,23 +18,24 @@ const chakraPetch = Chakra_Petch({
 });
 
 export const metadata: Metadata = {
-  title: "Fumi",
-  description: "Hi, I am Fumi",
+  title: "Fumi | Personal Website",
+  description: "Welcome to my personal website. Explore my work, projects, and socials.",
   icons: {
     icon: "/favicon.ico",
   },
   metadataBase: new URL("https://applefumi.xyz"),
   openGraph: {
-    title: "Fumi",
-    description: "Hi, I am Fumi",
+    title: "Fumi | Personal Website",
+    description: "Welcome to my personal website. Explore my work, projects, and socials.",
     url: "https://applefumi.xyz",
     siteName: "Fumi",
     images: [
       {
-        url: "/api/og",
+        url: "https://applefumi.xyz/api/og",
         width: 1200,
         height: 630,
         alt: "Fumi - Welcome",
+        type: "image/png",
       },
     ],
     locale: "en_US",
@@ -42,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Fumi",
-    description: "Hi, I am Fumi",
-    images: ["/api/og"],
+    title: "Fumi | Personal Website",
+    description: "Welcome to my personal website. Explore my work, projects, and socials.",
+    images: ["https://applefumi.xyz/api/og"],
   },
   robots: {
     index: true,

@@ -6,6 +6,7 @@ import { socialIcons } from "@/app/lib/social-icons";
 import { socialLinks, type SocialLink } from "@/app/lib/social-links";
 import { glassmorphism, glassmorphismBorderTop } from "@/app/lib/styles";
 import TechnologiesModal from "./TechnologiesModal";
+import { Settings } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -50,20 +51,21 @@ export default function Footer() {
         style={{ ...glassmorphism, ...glassmorphismBorderTop, paddingBottom: 'calc(10px + env(safe-area-inset-bottom))' }}
       >
         <div className="flex flex-col sm:flex-row items-center justify-between gap-2 sm:gap-0">
-          <div className="flex flex-col items-center sm:items-start gap-1">
+          <div className="flex flex-row items-center gap-2">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="cursor-pointer transition-colors duration-200 hover:text-white/70 p-1"
+              style={{ color: "rgba(255, 255, 255, 0.4)" }}
+              aria-label="View all technologies"
+            >
+              <Settings size={16} />
+            </button>
             <p
-              className="text-sm sm:text-xs font-[family-name:var(--font-geist-pixel-square)]"
+              className="text-sm sm:text-xs font-[family-name:var(--font-geist-mono)]"
               style={{ color: "rgba(255, 255, 255, 0.6)" }}
             >
               &copy; {year} @fumiluvapples. All rights reserved.
             </p>
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="text-xs sm:text-[10px] font-[family-name:var(--font-geist-mono)] cursor-pointer transition-colors duration-200 hover:text-white/70"
-              style={{ color: "rgba(255, 255, 255, 0.4)" }}
-            >
-              View all technologies
-            </button>
           </div>
           <div ref={iconsRef} className="flex items-center gap-4">
             {links.map((social, index) => (
