@@ -113,6 +113,7 @@ export default function Navbar() {
   const router = useRouter();
   const pathname = usePathname();
   const [isHovered, setIsHovered] = useState<string | null>(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "/";
   const activeLink = NAV_LINKS.find((item) => item.path === normalizedPath) || NAV_LINKS[0];
@@ -135,6 +136,11 @@ export default function Navbar() {
       console.error("Failed to fetch redirect URL:", error);
     }
   }, []);
+
+  const handleNavClick = useCallback((path: string) => {
+    router.push(path);
+    setIsMobileMenuOpen(false);
+  }, [router]);
 
   return (
     <div
@@ -168,7 +174,7 @@ export default function Navbar() {
           <div className={NAV_STYLES.spacer} />
 
           {/* DESKTOP NAV */}
-          <div className="flex items-center gap-1 mr-5">
+          <div className="hidden md:flex items-center gap-1 mr-5">
             {NAV_LINKS.map((nav) => (
               <DesktopNavLink
                 key={nav.path}
@@ -180,13 +186,63 @@ export default function Navbar() {
           </div>
 
           {/* RIGHT */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            {/* MOBILE HAMBURGER */}
+            <button
+              onClick={() => setIsMobileMenuOpen((prev) => !prev)}
+              className="md:hidden flex items-center justify-center p-2 rounded-md transition-colors duration-200 hover:bg-white/10 min-h-[44px] min-w-[44px]"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isMobileMenuOpen}
+            >
+              <div className="flex flex-col gap-[5px] w-5">
+                <span
+                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
+                    isMobileMenuOpen ? "rotate-45 translate-y-[7px]" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
+                    isMobileMenuOpen ? "opacity-0" : ""
+                  }`}
+                />
+                <span
+                  className={`block h-[2px] bg-white/60 rounded-full transition-all duration-300 ${
+                    isMobileMenuOpen ? "-rotate-45 -translate-y-[7px]" : ""
+                  }`}
+                />
+              </div>
+            </button>
+
             <HauntButton
               isHovered={isHovered}
               onClick={handleHauntClick}
               onHoverEnter={() => setIsHovered("haunt")}
               onHoverLeave={() => setIsHovered(null)}
             />
+          </div>
+        </div>
+
+        {/* MOBILE MENU */}
+        <div
+          className={`md:hidden overflow-hidden transition-all duration-300 ${
+            isMobileMenuOpen ? "max-h-48 opacity-100" : "max-h-0 opacity-0"
+          }`}
+        >
+          <div className="flex flex-col gap-1 px-4 pb-3 pt-1 border-t border-white/10">
+            {NAV_LINKS.map((nav) => {
+              const isActive = activeLink.path === nav.path;
+              return (
+                <button
+                  key={nav.path}
+                  onClick={() => handleNavClick(nav.path)}
+                  className={`relative px-3 py-2 text-sm font-medium text-left rounded-md transition-all duration-200 ${
+                    isActive ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {nav.label}
+                </button>
+              );
+            })}
           </div>
         </div>
       </nav>
