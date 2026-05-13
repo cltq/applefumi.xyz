@@ -1,6 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
+import DiscordWidget from "./DiscordWidget";
 
 export default function HomeContent() {
   return (
@@ -50,24 +51,3 @@ export default function HomeContent() {
   );
 }
 
-function DiscordWidget() {
-  return (
-    <div className="relative w-full h-full" style={{ backgroundColor: "#1e1f22", borderRadius: "0.5rem", overflow: "hidden" }}>
-      <iframe
-        className="border-none"
-        title="Discord user embed"
-        sandbox="allow-scripts allow-same-origin"
-        loading="lazy"
-        style={{
-          position: "absolute",
-          top: 0,
-          left: "-10px",
-          width: "calc(100% + 20px)",
-          height: "100%",
-          backgroundColor: "transparent",
-        }}
-        src="https://widgets.vendicated.dev/user?id=969088519161139270&theme=dark&banner=true&full-banner=true&rounded-corners=false&discord-icon=true&badges=true&guess-nitro=true"
-      />
-    </div>
-  );
-}
