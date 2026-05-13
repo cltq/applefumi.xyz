@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: "Fumi",
     images: [
       {
-        url: "https://applefumi.xyz/api/og",
+        url: "https://applefumi.xyz/mainpage.png",
         width: 1200,
         height: 630,
         alt: "Fumi - Welcome",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Fumi | Personal Website",
     description: "Welcome to my personal website. Explore my work, projects, and socials.",
-    images: ["https://applefumi.xyz/api/og"],
+    images: ["https://applefumi.xyz/mainpage.png"],
   },
   robots: {
     index: true,
