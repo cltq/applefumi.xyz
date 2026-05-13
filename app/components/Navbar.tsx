@@ -7,6 +7,7 @@ import { useCallback, useState, ReactElement } from "react";
 const NAV_LINKS = [
   { label: "Home", path: "/" },
   { label: "Test", path: "/test" },
+  { label: "Test2", path: "/testt" },
 ];
 
 const NAV_STYLES = {
