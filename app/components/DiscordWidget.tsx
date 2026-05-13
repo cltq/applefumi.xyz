@@ -20,7 +20,7 @@ export default function DiscordWidget() {
 
   return (
     <motion.div
-      className="relative w-[340px] h-[192px]"
+      className="relative w-full max-w-[340px] h-[192px]"
       style={{
         clipPath: "inset(0 round 1rem)",
         WebkitClipPath: "inset(0 round 1rem)",
@@ -52,7 +52,7 @@ export default function DiscordWidget() {
           style={{
             position: "absolute",
             top: 0,
-            left: 0,
+            left: "-20px",
             width: "calc(100% + 40px)",
             height: "100%",
             border: "0",
